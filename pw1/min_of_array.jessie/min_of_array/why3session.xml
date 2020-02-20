@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="4">
+<prover id="0" name="Alt-Ergo" version="2.2.0" timelimit="5" steplimit="0" memlimit="1000"/>
+<file name="../min_of_array.mlw" expanded="true">
+<theory name="Jessie_model" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
+</theory>
+<theory name="Jessie_program" sum="f78b27cba05fe27d0f9d514b563fe73d" expanded="true">
+ <goal name="WP_parameter argmin_ensures_default" expl="Function argmin, default behavior">
+ <proof prover="0"><result status="timeout" time="5.01"/></proof>
+ <transf name="split_goal_wp">
+  <goal name="WP_parameter argmin_ensures_default.1" expl="loop invariant init">
+  <transf name="split_goal_wp">
+   <goal name="WP_parameter argmin_ensures_default.1.1" expl="Function argmin, default behavior">
+   <transf name="introduce_premises">
+    <goal name="WP_parameter argmin_ensures_default.1.1.1" expl="Function argmin, default behavior">
+    <transf name="inline_goal">
+     <goal name="WP_parameter argmin_ensures_default.1.1.1.1" expl="Function argmin, default behavior">
+     <proof prover="0"><result status="valid" time="0.02" steps="26"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="WP_parameter argmin_ensures_default.1.2" expl="Function argmin, default behavior">
+   <transf name="introduce_premises">
+    <goal name="WP_parameter argmin_ensures_default.1.2.1" expl="Function argmin, default behavior">
+    <proof prover="0"><result status="valid" time="0.02" steps="26"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="WP_parameter argmin_ensures_default.1.3" expl="Function argmin, default behavior">
+   <transf name="introduce_premises">
+    <goal name="WP_parameter argmin_ensures_default.1.3.1" expl="Function argmin, default behavior">
+    <transf name="inline_goal">
+     <goal name="WP_parameter argmin_ensures_default.1.3.1.1" expl="Function argmin, default behavior">
+     <proof prover="0"><result status="valid" time="0.02" steps="26"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="WP_parameter argmin_ensures_default.1.4" expl="Function argmin, default behavior">
+   <transf name="introduce_premises">
+    <goal name="WP_parameter argmin_ensures_default.1.4.1" expl="Function argmin, default behavior">
+    <transf name="inline_goal">
+     <goal name="WP_parameter argmin_ensures_default.1.4.1.1" expl="Function argmin, default behavior">
+     <proof prover="0"><result status="valid" time="0.02" steps="30"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="WP_parameter argmin_ensures_default.1.5" expl="Function argmin, default behavior">
+   <transf name="introduce_premises">
+    <goal name="WP_parameter argmin_ensures_default.1.5.1" expl="Function argmin, default behavior">
+    <transf name="inline_goal">
+     <goal name="WP_parameter argmin_ensures_default.1.5.1.1" expl="Function argmin, default behavior">
+     <proof prover="0"><result status="valid" time="0.02" steps="26"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="WP_parameter argmin_ensures_default.1.6" expl="Function argmin, default behavior">
+   <transf name="introduce_premises">
+    <goal name="WP_parameter argmin_ensures_default.1.6.1" expl="Function argmin, default behavior">
+    <transf name="inline_goal">
+     <goal name="WP_parameter argmin_ensures_default.1.6.1.1" expl="Function argmin, default behavior">
+     <proof prover="0"><result status="valid" time="0.01" steps="26"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="WP_parameter argmin_ensures_default.2" expl="loop invariant preservation">
+  <transf name="split_goal_wp">
+   <goal name="WP_parameter argmin_ensures_default.2.1" expl="Function argmin, default behavior">
+   <transf name="introduce_premises">
+    <goal name="WP_parameter argmin_ensures_default.2.1.1" expl="Function argmin, default behavior">
+    <transf name="inline_goal">
+     <goal name="WP_parameter argmin_ensures_default.2.1.1.1" expl="Function argmin, default behavior">
+     <proof prover="0"><result status="valid" time="0.02" steps="51"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="WP_parameter argmin_ensures_default.2.2" expl="Function argmin, default behavior">
+   <transf name="introduce_premises">
+    <goal name="WP_parameter argmin_ensures_default.2.2.1" expl="Function argmin, default behavior">
+    <proof prover="0"><result status="valid" time="0.02" steps="51"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="WP_parameter argmin_ensures_default.2.3" expl="Function argmin, default behavior">
+   <transf name="introduce_premises">
+    <goal name="WP_parameter argmin_ensures_default.2.3.1" expl="Function argmin, default behavior">
+    <transf name="inline_goal">
+     <goal name="WP_parameter argmin_ensures_default.2.3.1.1" expl="Function argmin, default behavior">
+     <proof prover="0"><result status="valid" time="0.06" steps="51"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="WP_parameter argmin_ensures_default.2.4" expl="Function argmin, default behavior">
+   <transf name="introduce_premises">
+    <goal name="WP_parameter argmin_ensures_default.2.4.1" expl="Function argmin, default behavior">
+    <transf name="inline_goal">
+     <goal name="WP_parameter argmin_ensures_default.2.4.1.1" expl="Function argmin, default behavior">
+     <proof prover="0"><result status="valid" time="0.04" steps="156"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="WP_parameter argmin_ensures_default.2.5" expl="Function argmin, default behavior">
+   <transf name="introduce_premises">
+    <goal name="WP_parameter argmin_ensures_default.2.5.1" expl="Function argmin, default behavior">
+    <transf name="inline_goal">
+     <goal name="WP_parameter argmin_ensures_default.2.5.1.1" expl="Function argmin, default behavior">
+     <proof prover="0"><result status="valid" time="0.02" steps="51"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="WP_parameter argmin_ensures_default.2.6" expl="Function argmin, default behavior">
+   <transf name="introduce_premises">
+    <goal name="WP_parameter argmin_ensures_default.2.6.1" expl="Function argmin, default behavior">
+    <transf name="inline_goal">
+     <goal name="WP_parameter argmin_ensures_default.2.6.1.1" expl="Function argmin, default behavior">
+     <proof prover="0"><result status="valid" time="0.03" steps="51"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="WP_parameter argmin_ensures_default.3" expl="loop invariant preservation">
+  <transf name="split_goal_wp">
+   <goal name="WP_parameter argmin_ensures_default.3.1" expl="Function argmin, default behavior">
+   <transf name="introduce_premises">
+    <goal name="WP_parameter argmin_ensures_default.3.1.1" expl="Function argmin, default behavior">
+    <transf name="inline_goal">
+     <goal name="WP_parameter argmin_ensures_default.3.1.1.1" expl="Function argmin, default behavior">
+     <proof prover="0"><result status="valid" time="0.02" steps="49"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="WP_parameter argmin_ensures_default.3.2" expl="Function argmin, default behavior">
+   <transf name="introduce_premises">
+    <goal name="WP_parameter argmin_ensures_default.3.2.1" expl="Function argmin, default behavior">
+    <proof prover="0"><result status="valid" time="0.02" steps="49"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="WP_parameter argmin_ensures_default.3.3" expl="Function argmin, default behavior">
+   <transf name="introduce_premises">
+    <goal name="WP_parameter argmin_ensures_default.3.3.1" expl="Function argmin, default behavior">
+    <transf name="inline_goal">
+     <goal name="WP_parameter argmin_ensures_default.3.3.1.1" expl="Function argmin, default behavior">
+     <proof prover="0"><result status="valid" time="0.04" steps="49"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="WP_parameter argmin_ensures_default.3.4" expl="Function argmin, default behavior">
+   <transf name="introduce_premises">
+    <goal name="WP_parameter argmin_ensures_default.3.4.1" expl="Function argmin, default behavior">
+    <transf name="inline_goal">
+     <goal name="WP_parameter argmin_ensures_default.3.4.1.1" expl="Function argmin, default behavior">
+     <proof prover="0"><result status="valid" time="0.03" steps="57"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="WP_parameter argmin_ensures_default.3.5" expl="Function argmin, default behavior">
+   <transf name="introduce_premises">
+    <goal name="WP_parameter argmin_ensures_default.3.5.1" expl="Function argmin, default behavior">
+    <transf name="inline_goal">
+     <goal name="WP_parameter argmin_ensures_default.3.5.1.1" expl="Function argmin, default behavior">
+     <proof prover="0"><result status="valid" time="0.02" steps="49"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="WP_parameter argmin_ensures_default.3.6" expl="Function argmin, default behavior">
+   <transf name="introduce_premises">
+    <goal name="WP_parameter argmin_ensures_default.3.6.1" expl="Function argmin, default behavior">
+    <transf name="inline_goal">
+     <goal name="WP_parameter argmin_ensures_default.3.6.1.1" expl="Function argmin, default behavior">
+     <proof prover="0"><result status="valid" time="0.02" steps="49"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="WP_parameter argmin_ensures_default.4" expl="postcondition">
+  <transf name="split_goal_wp">
+   <goal name="WP_parameter argmin_ensures_default.4.1" expl="Function argmin, default behavior">
+   <transf name="introduce_premises">
+    <goal name="WP_parameter argmin_ensures_default.4.1.1" expl="Function argmin, default behavior">
+    <transf name="inline_goal">
+     <goal name="WP_parameter argmin_ensures_default.4.1.1.1" expl="Function argmin, default behavior">
+     <proof prover="0"><result status="valid" time="0.03" steps="53"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="WP_parameter argmin_ensures_default.4.2" expl="Function argmin, default behavior">
+   <transf name="introduce_premises">
+    <goal name="WP_parameter argmin_ensures_default.4.2.1" expl="Function argmin, default behavior">
+    <transf name="inline_goal">
+     <goal name="WP_parameter argmin_ensures_default.4.2.1.1" expl="Function argmin, default behavior">
+     <proof prover="0"><result status="valid" time="0.04" steps="45"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="WP_parameter argmin_ensures_default.4.3" expl="Function argmin, default behavior">
+   <transf name="introduce_premises">
+    <goal name="WP_parameter argmin_ensures_default.4.3.1" expl="Function argmin, default behavior">
+    <transf name="inline_goal">
+     <goal name="WP_parameter argmin_ensures_default.4.3.1.1" expl="Function argmin, default behavior">
+     <proof prover="0"><result status="valid" time="0.02" steps="45"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="WP_parameter argmin_ensures_default.4.4" expl="Function argmin, default behavior">
+   <transf name="introduce_premises">
+    <goal name="WP_parameter argmin_ensures_default.4.4.1" expl="Function argmin, default behavior">
+    <proof prover="0"><result status="valid" time="0.02" steps="45"/></proof>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="WP_parameter argmin_safety" expl="Function argmin, Safety" expanded="true">
+ <proof prover="0"><result status="valid" time="0.03" steps="100"/></proof>
+ </goal>
+</theory>
+</file>
+</why3session>

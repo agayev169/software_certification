@@ -1,0 +1,396 @@
+[JC_51]
+kind = DivByZero
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 19
+begin = 24
+end = 29
+
+[JC_45]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 15
+begin = 23
+end = 29
+
+[JC_31]
+kind = ArithOverflow
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 20
+begin = 22
+end = 27
+
+[JC_17]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 8
+begin = 12
+end = 24
+
+[JC_55]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 15
+begin = 23
+end = 38
+
+[JC_48]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_23]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 15
+begin = 28
+end = 38
+
+[JC_22]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 15
+begin = 23
+end = 29
+
+[JC_5]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_9]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_24]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 15
+begin = 23
+end = 38
+
+[JC_25]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_41]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.jessie/palindrome_array.jc"
+line = 59
+begin = 9
+end = 1290
+
+[JC_47]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 15
+begin = 23
+end = 38
+
+[JC_52]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 16
+begin = 23
+end = 73
+
+[JC_26]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.jessie/palindrome_array.jc"
+line = 59
+begin = 9
+end = 1290
+
+[JC_8]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 3
+begin = 13
+end = 31
+
+[JC_54]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 15
+begin = 28
+end = 38
+
+[JC_13]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_11]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_15]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_36]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 16
+begin = 23
+end = 73
+
+[JC_39]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 15
+begin = 23
+end = 38
+
+[JC_40]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_35]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 17
+begin = 21
+end = 30
+
+[palindrome_ensures_false_]
+name = "Function palindrome"
+behavior = "Behavior `false_'"
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 13
+begin = 4
+end = 14
+
+[JC_27]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.jessie/palindrome_array.jc"
+line = 59
+begin = 9
+end = 1290
+
+[JC_38]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 15
+begin = 28
+end = 38
+
+[JC_12]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.jessie/palindrome_array.jc"
+line = 39
+begin = 10
+end = 18
+
+[JC_6]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 2
+begin = 13
+end = 18
+
+[JC_44]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 16
+begin = 23
+end = 73
+
+[JC_4]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_42]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.jessie/palindrome_array.jc"
+line = 59
+begin = 9
+end = 1290
+
+[JC_46]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 15
+begin = 28
+end = 38
+
+[JC_32]
+kind = ArithOverflow
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 20
+begin = 22
+end = 31
+
+[JC_56]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_33]
+kind = PointerDeref
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 20
+begin = 20
+end = 32
+
+[palindrome_ensures_default]
+name = "Function palindrome"
+behavior = "default behavior"
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 13
+begin = 4
+end = 14
+
+[JC_29]
+kind = ArithOverflow
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 19
+begin = 24
+end = 29
+
+[JC_7]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 3
+begin = 13
+end = 31
+
+[JC_16]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_43]
+kind = DivByZero
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 19
+begin = 24
+end = 29
+
+[JC_2]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 3
+begin = 13
+end = 31
+
+[JC_34]
+kind = ArithOverflow
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 19
+begin = 31
+end = 34
+
+[JC_14]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.jessie/palindrome_array.jc"
+line = 39
+begin = 10
+end = 18
+
+[JC_53]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 15
+begin = 23
+end = 29
+
+[palindrome_safety]
+name = "Function palindrome"
+behavior = "Safety"
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 13
+begin = 4
+end = 14
+
+[JC_21]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 16
+begin = 23
+end = 73
+
+[JC_49]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.jessie/palindrome_array.jc"
+line = 59
+begin = 9
+end = 1290
+
+[JC_1]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 2
+begin = 13
+end = 18
+
+[JC_37]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 15
+begin = 23
+end = 29
+
+[JC_10]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_57]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.jessie/palindrome_array.jc"
+line = 59
+begin = 9
+end = 1290
+
+[JC_59]
+kind = DivByZero
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 19
+begin = 24
+end = 29
+
+[JC_20]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 11
+begin = 12
+end = 24
+
+[palindrome_ensures_true_]
+name = "Function palindrome"
+behavior = "Behavior `true_'"
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 13
+begin = 4
+end = 14
+
+[JC_18]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 8
+begin = 12
+end = 24
+
+[JC_3]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 3
+begin = 13
+end = 31
+
+[JC_19]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 11
+begin = 12
+end = 24
+
+[JC_50]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.jessie/palindrome_array.jc"
+line = 59
+begin = 9
+end = 1290
+
+[JC_30]
+kind = PointerDeref
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 20
+begin = 12
+end = 16
+
+[JC_58]
+file = "/home/agayev169/software_certification/pw1/palindrome_array.jessie/palindrome_array.jc"
+line = 59
+begin = 9
+end = 1290
+
+[JC_28]
+kind = DivByZero
+file = "/home/agayev169/software_certification/pw1/palindrome_array.c"
+line = 19
+begin = 24
+end = 29
+

@@ -1,0 +1,90 @@
+# IntModel = bounded
+# InvariantPolicy = Arguments
+# SeparationPolicy = Regions
+# AnnotationPolicy = None
+# AbstractDomain = Pol
+
+axiomatic Padding {
+
+  logic type padding
+  
+}
+
+type int8 = -128..127
+
+type int32 = -2147483648..2147483647
+
+tag intP = {
+  int32 intM: 32;
+}
+
+type intP = [intP]
+
+tag charP = {
+  int8 charM: 8;
+}
+
+type charP = [charP]
+
+tag voidP = {
+}
+
+type voidP = [voidP]
+
+int32 argmin(intP[..] a, int32 n)
+  requires (_C_30 : (n > 1));
+  requires (_C_27 : ((_C_28 : (\offset_min(a) <= 0)) &&
+                      (_C_29 : (\offset_max(a) >= (n - 1)))));
+behavior default:
+  ensures (_C_20 : ((_C_21 : (\forall int32 i;
+                               (((0 <= i) && (i < \at(n,Old))) ==>
+                                 ((\at(a,Old) + \result).intM <=
+                                   (\at(a,Old) + i).intM)))) &&
+                     ((_C_23 : (\exists int32 i_0;
+                                 (((0 <= i_0) && (i_0 < \at(n,Old))) &&
+                                   ((\at(a,Old) + \result).intM ==
+                                     (\at(a,Old) + i_0).intM)))) &&
+                       ((_C_25 : (0 <= \result)) &&
+                         (_C_26 : (\result < \at(n,Old)))))));
+{  
+   (var int32 index_min);
+   
+   (var int32 i);
+   
+   {  (_C_1 : (index_min = 0));
+      
+      {  (_C_2 : (i = 1));
+         
+         loop 
+         behavior default:
+           invariant (_C_9 : ((_C_10 : (1 <= i)) && (_C_11 : (i <= n))));
+         behavior default:
+           invariant (_C_8 : (\forall int32 j;
+                               (((0 <= j) && (j < i)) ==>
+                                 ((a + index_min).intM <= (a + j).intM))));
+         behavior default:
+           invariant (_C_7 : (\exists int32 j_0;
+                               (((0 <= j_0) && (j_0 < i)) &&
+                                 ((a + index_min).intM == (a + j_0).intM))));
+         behavior default:
+           invariant (_C_4 : ((_C_5 : (0 <= index_min)) &&
+                               (_C_6 : (index_min < n))));
+         variant (_C_3 : (n - i));
+         while (true)
+         {  
+            {  (if (i < n) then () else 
+               (goto while_0_break));
+               
+               {  (if ((_C_16 : (_C_15 : (a + i)).intM) <
+                        (_C_14 : (_C_13 : (a + index_min)).intM)) then 
+                  (_C_12 : (index_min = i)) else ())
+               };
+               (_C_19 : (i = (_C_18 : ((_C_17 : (i + 1)) :> int32))))
+            }
+         };
+         (while_0_break : ())
+      };
+      
+      (return index_min)
+   }
+}

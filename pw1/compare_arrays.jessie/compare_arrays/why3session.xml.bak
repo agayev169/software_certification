@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="4">
+<prover id="0" name="Alt-Ergo" version="2.2.0" timelimit="5" steplimit="0" memlimit="1000"/>
+<file name="../compare_arrays.mlw" expanded="true">
+<theory name="Jessie_model" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
+</theory>
+<theory name="Jessie_program" sum="dcbf5efe37d60fdbd59a6882e2414f99" expanded="true">
+ <goal name="WP_parameter compare_arrays_ensures_default" expl="Function compare_arrays, default behavior" expanded="true">
+ <proof prover="0"><result status="valid" time="0.04" steps="88"/></proof>
+ </goal>
+ <goal name="WP_parameter compare_arrays_ensures_false_" expl="Function compare_arrays, Behavior `false_&apos;" expanded="true">
+ <proof prover="0"><result status="valid" time="0.03" steps="63"/></proof>
+ </goal>
+ <goal name="WP_parameter compare_arrays_ensures_true_" expl="Function compare_arrays, Behavior `true_&apos;" expanded="true">
+ <proof prover="0"><result status="valid" time="0.02" steps="36"/></proof>
+ </goal>
+ <goal name="WP_parameter compare_arrays_safety" expl="Function compare_arrays, Safety" expanded="true">
+ <proof prover="0"><result status="valid" time="0.02" steps="55"/></proof>
+ </goal>
+</theory>
+</file>
+</why3session>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="4">
+<prover id="0" name="Alt-Ergo" version="2.2.0" timelimit="5" steplimit="0" memlimit="1000"/>
+<file name="../swap.mlw" expanded="true">
+<theory name="Jessie_model" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
+</theory>
+<theory name="Jessie_program" sum="e405c9a32943ffb168b0cc2bb6b2b97a" expanded="true">
+ <goal name="WP_parameter swap_ensures_default" expl="Function swap, default behavior" expanded="true">
+ <proof prover="0"><result status="valid" time="0.03" steps="60"/></proof>
+ </goal>
+ <goal name="WP_parameter swap_safety" expl="Function swap, Safety" expanded="true">
+ <proof prover="0"><result status="valid" time="0.02" steps="145"/></proof>
+ </goal>
+</theory>
+</file>
+</why3session>

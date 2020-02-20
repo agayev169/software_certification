@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="4">
+<prover id="0" name="Alt-Ergo" version="2.2.0" timelimit="5" steplimit="0" memlimit="1000"/>
+<file name="../palindrome_array.mlw" expanded="true">
+<theory name="Jessie_model" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
+</theory>
+<theory name="Jessie_program" sum="cd645b4cb3f507fec59165216f26121b" expanded="true">
+ <goal name="WP_parameter palindrome_ensures_default" expl="Function palindrome, default behavior" expanded="true">
+ <proof prover="0"><result status="valid" time="0.08" steps="183"/></proof>
+ </goal>
+ <goal name="WP_parameter palindrome_ensures_false_" expl="Function palindrome, Behavior `false_&apos;" expanded="true">
+ <proof prover="0"><result status="valid" time="0.04" steps="107"/></proof>
+ </goal>
+ <goal name="WP_parameter palindrome_ensures_true_" expl="Function palindrome, Behavior `true_&apos;" expanded="true">
+ <proof prover="0"><result status="valid" time="0.03" steps="88"/></proof>
+ </goal>
+ <goal name="WP_parameter palindrome_safety" expl="Function palindrome, Safety" expanded="true">
+ <proof prover="0"><result status="valid" time="0.06" steps="182"/></proof>
+ </goal>
+</theory>
+</file>
+</why3session>

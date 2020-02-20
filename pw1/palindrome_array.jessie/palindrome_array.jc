@@ -1,0 +1,93 @@
+# IntModel = bounded
+# InvariantPolicy = Arguments
+# SeparationPolicy = Regions
+# AnnotationPolicy = None
+# AbstractDomain = Pol
+
+axiomatic Padding {
+
+  logic type padding
+  
+}
+
+type int8 = -128..127
+
+type int32 = -2147483648..2147483647
+
+tag intP = {
+  int32 intM: 32;
+}
+
+type intP = [intP]
+
+tag charP = {
+  int8 charM: 8;
+}
+
+type charP = [charP]
+
+tag voidP = {
+}
+
+type voidP = [voidP]
+
+int32 palindrome(intP[..] a, int32 n)
+  requires (_C_28 : (n > 0));
+  requires (_C_25 : ((_C_26 : (\offset_min(a) <= 0)) &&
+                      (_C_27 : (\offset_max(a) >= (n - 1)))));
+behavior default:
+  assigns \nothing;
+  ensures (_C_22 : true);
+behavior true_:
+  assumes (\forall int32 i_0;
+            (((0 <= i_0) && (i_0 < (n / 2))) ==>
+              ((a + i_0).intM == (a + ((n - i_0) - 1)).intM)));
+  ensures (_C_23 : (\result == 1));
+behavior false_:
+  assumes (\exists int32 i;
+            (((0 <= i) && (i < (n / 2))) &&
+              ((a + i).intM != (a + ((n - i) - 1)).intM)));
+  ensures (_C_24 : (\result == 0));
+{  
+   (var int32 i);
+   
+   (var int32 __retres);
+   
+   {  
+      {  (_C_1 : (i = 0));
+         
+         loop 
+         behavior default:
+           invariant (_C_4 : ((_C_5 : (0 <= i)) && (_C_6 : (i <= (n / 2)))));
+         behavior default:
+           invariant (_C_3 : (\forall int32 j;
+                               (((0 <= j) && (j < i)) ==>
+                                 ((a + j).intM == (a + ((n - j) - 1)).intM))));
+         variant (_C_2 : (n - (2 * i)));
+         while (true)
+         {  
+            {  (if (i < (_C_8 : ((_C_7 : (n / 2)) :> int32))) then () else 
+               (goto while_0_break));
+               
+               {  (if ((_C_17 : (_C_16 : (a + i)).intM) !=
+                        (_C_15 : (_C_14 : (a +
+                                            (_C_13 : ((_C_12 : ((_C_11 : (
+                                                                (_C_10 : 
+                                                                (n -
+                                                                  i)) :> int32)) -
+                                                                 1)) :> int32)))).intM)) then 
+                  {  (_C_9 : (__retres = 0));
+                     
+                     (goto return_label)
+                  } else ())
+               };
+               (_C_20 : (i = (_C_19 : ((_C_18 : (i + 1)) :> int32))))
+            }
+         };
+         (while_0_break : ())
+      };
+      (_C_21 : (__retres = 1));
+      (return_label : 
+      (return __retres))
+   }
+}
