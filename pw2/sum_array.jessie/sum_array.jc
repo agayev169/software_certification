@@ -1,0 +1,89 @@
+# IntModel = bounded
+# InvariantPolicy = Arguments
+# SeparationPolicy = Regions
+# AnnotationPolicy = None
+# AbstractDomain = Pol
+
+axiomatic Padding {
+
+  logic type padding
+  
+}
+
+type int8 = -128..127
+
+type int32 = -2147483648..2147483647
+
+tag intP = {
+  int32 intM: 32;
+}
+
+type intP = [intP]
+
+tag charP = {
+  int8 charM: 8;
+}
+
+type charP = [charP]
+
+tag voidP = {
+}
+
+type voidP = [voidP]
+
+unit sum_array(intP[..] a, intP[..] b, intP[..] c, int32 n)
+  requires (_C_31 : (n > 0));
+  requires (_C_28 : ((_C_29 : (\offset_min(a) <= 0)) &&
+                      (_C_30 : (\offset_max(a) >= (n - 1)))));
+  requires (_C_25 : ((_C_26 : (\offset_min(b) <= 0)) &&
+                      (_C_27 : (\offset_max(b) >= (n - 1)))));
+  requires (_C_22 : ((_C_23 : (\offset_min(c) <= 0)) &&
+                      (_C_24 : (\offset_max(c) >= (n - 1)))));
+  requires (_C_21 : (\forall int32 i;
+                      (((0 <= i) && (i < n)) ==>
+                        (((- 10000) <= (a + i).intM) &&
+                          ((a + i).intM <= 10000)))));
+  requires (_C_20 : (\forall int32 i_0;
+                      (((0 <= i_0) && (i_0 < n)) ==>
+                        (((- 10000) <= (b + i_0).intM) &&
+                          ((b + i_0).intM <= 10000)))));
+behavior default:
+  ensures (_C_19 : (\forall int32 i_1;
+                     (((0 <= i_1) && (i_1 < \at(n,Old))) ==>
+                       ((\at(c,Old) + i_1).intM ==
+                         ((\at(a,Old) + i_1).intM + (\at(b,Old) + i_1).intM)))));
+{  
+   (var int32 i);
+   
+   {  (_C_1 : (i = 0));
+      
+      loop 
+      behavior default:
+        invariant (_C_4 : ((_C_5 : (0 <= i)) && (_C_6 : (i <= n))));
+      behavior default:
+        invariant (_C_3 : (\forall int32 j;
+                            (((0 <= j) && (j < i)) ==>
+                              ((c + j).intM == ((a + j).intM + (b + j).intM)))));
+      variant (_C_2 : (n - i));
+      while (true)
+      {  
+         {  (if (i < n) then () else 
+            (goto while_0_break));
+            
+            {  (_C_15 : ((_C_14 : (_C_13 : (c + i)).intM) = (_C_12 : (
+                                                            (_C_11 : 
+                                                            ((_C_10 : 
+                                                             (_C_9 : 
+                                                             (a + i)).intM) +
+                                                              (_C_8 : 
+                                                              (_C_7 : 
+                                                              (b + i)).intM))) :> int32))))
+            };
+            (_C_18 : (i = (_C_17 : ((_C_16 : (i + 1)) :> int32))))
+         }
+      };
+      (while_0_break : ());
+      
+      (return ())
+   }
+}

@@ -1,0 +1,127 @@
+[_C_4]
+file = "/home/agayev169/software_certification/pw2/mult_by_sum.c"
+line = 13
+begin = 23
+end = 35
+
+[_C_19]
+file = "/home/agayev169/software_certification/pw2/mult_by_sum.c"
+line = 2
+begin = 13
+end = 24
+
+[_C_13]
+file = "/home/agayev169/software_certification/pw2/mult_by_sum.c"
+line = 16
+begin = 27
+end = 30
+
+[_C_5]
+file = "/home/agayev169/software_certification/pw2/mult_by_sum.c"
+line = 12
+begin = 23
+end = 34
+
+[_C_12]
+file = "/home/agayev169/software_certification/pw2/mult_by_sum.c"
+line = 16
+begin = 27
+end = 30
+
+[_C_9]
+file = "/home/agayev169/software_certification/pw2/mult_by_sum.c"
+line = 17
+begin = 8
+end = 16
+
+[_C_6]
+file = "/home/agayev169/software_certification/pw2/mult_by_sum.c"
+line = 12
+begin = 23
+end = 29
+
+[_C_20]
+file = "/home/agayev169/software_certification/pw2/mult_by_sum.c"
+line = 2
+begin = 23
+end = 33
+
+[_C_3]
+file = "/home/agayev169/software_certification/pw2/mult_by_sum.c"
+line = 14
+begin = 21
+end = 26
+
+[_C_17]
+file = "/home/agayev169/software_certification/pw2/mult_by_sum.c"
+line = 3
+begin = 18
+end = 28
+
+[_C_7]
+file = "/home/agayev169/software_certification/pw2/mult_by_sum.c"
+line = 12
+begin = 28
+end = 34
+
+[_C_15]
+file = "/home/agayev169/software_certification/pw2/mult_by_sum.c"
+line = 3
+begin = 13
+end = 28
+
+[_C_10]
+file = "/home/agayev169/software_certification/pw2/mult_by_sum.c"
+line = 17
+begin = 8
+end = 16
+
+[_C_8]
+file = "/home/agayev169/software_certification/pw2/mult_by_sum.c"
+line = 17
+begin = 8
+end = 16
+
+[_C_18]
+file = "/home/agayev169/software_certification/pw2/mult_by_sum.c"
+line = 2
+begin = 13
+end = 33
+
+[_C_14]
+file = "/home/agayev169/software_certification/pw2/mult_by_sum.c"
+line = 5
+begin = 12
+end = 28
+
+[_C_2]
+file = "/home/agayev169/software_certification/pw2/mult_by_sum.c"
+line = 16
+begin = 13
+end = 14
+
+[_C_16]
+file = "/home/agayev169/software_certification/pw2/mult_by_sum.c"
+line = 3
+begin = 13
+end = 19
+
+[_C_1]
+file = "/home/agayev169/software_certification/pw2/mult_by_sum.c"
+line = 9
+begin = 8
+end = 11
+
+[_C_11]
+file = "/home/agayev169/software_certification/pw2/mult_by_sum.c"
+line = 16
+begin = 27
+end = 30
+
+[mult]
+name = "Function mult"
+file = "/home/agayev169/software_certification/pw2/mult_by_sum.c"
+line = 7
+begin = 4
+end = 8
+

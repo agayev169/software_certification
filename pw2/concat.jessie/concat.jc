@@ -1,0 +1,121 @@
+# IntModel = bounded
+# InvariantPolicy = Arguments
+# SeparationPolicy = Regions
+# AnnotationPolicy = None
+# AbstractDomain = Pol
+
+axiomatic Padding {
+
+  logic type padding
+  
+}
+
+type int8 = -128..127
+
+type int32 = -2147483648..2147483647
+
+tag intP = {
+  int32 intM: 32;
+}
+
+type intP = [intP]
+
+tag charP = {
+  int8 charM: 8;
+}
+
+type charP = [charP]
+
+tag voidP = {
+}
+
+type voidP = [voidP]
+
+unit concat(intP[..] a, int32 na, intP[..] b, int32 nb, intP[..] c)
+  requires (_C_46 : ((_C_47 : (\offset_min(a) <= 0)) &&
+                      (_C_48 : (\offset_max(a) >= (na - 1)))));
+  requires (_C_43 : ((_C_44 : (\offset_min(b) <= 0)) &&
+                      (_C_45 : (\offset_max(b) >= (nb - 1)))));
+  requires (_C_40 : ((_C_41 : (\offset_min(c) <= 0)) &&
+                      (_C_42 : (\offset_max(c) >= ((na + nb) - 1)))));
+  requires (_C_39 : (na > 0));
+  requires (_C_38 : (nb > 0));
+  requires (_C_37 : ((na + nb) < 1000000000));
+behavior default:
+  ensures (_C_34 : ((_C_35 : (\forall int32 i;
+                               (((0 <= i) && (i < \at(na,Old))) ==>
+                                 ((\at(c,Old) + i).intM ==
+                                   (\at(a,Old) + i).intM)))) &&
+                     (_C_36 : (\forall int32 j_2;
+                                (((\at(na,Old) <= j_2) &&
+                                   (j_2 < \at(nb,Old))) ==>
+                                  ((\at(c,Old) + j_2).intM ==
+                                    (\at(b,Old) + (j_2 - \at(na,Old))).intM))))));
+{  
+   (var int32 i);
+   
+   (var int32 i_0);
+   
+   {  
+      {  (_C_1 : (i = 0));
+         
+         loop 
+         behavior default:
+           invariant (_C_4 : ((_C_5 : (0 <= i)) && (_C_6 : (i <= na))));
+         behavior default:
+           invariant (_C_3 : (\forall int32 j;
+                               (((0 <= j) && (j < i)) ==>
+                                 ((c + j).intM == (a + j).intM))));
+         variant (_C_2 : (na - i));
+         while (true)
+         {  
+            {  (if (i < na) then () else 
+               (goto while_0_break));
+               
+               {  (_C_11 : ((_C_10 : (_C_9 : (c + i)).intM) = (_C_8 : 
+                                                              (_C_7 : 
+                                                              (a + i)).intM)))
+               };
+               (_C_14 : (i = (_C_13 : ((_C_12 : (i + 1)) :> int32))))
+            }
+         };
+         (while_0_break : ())
+      };
+      
+      {  (_C_15 : (i_0 = na));
+         
+         loop 
+         behavior default:
+           invariant (_C_19 : ((_C_20 : (na <= i_0)) &&
+                                (_C_21 : (i_0 <= (na + nb)))));
+         behavior default:
+           invariant (_C_18 : (\forall int32 j_0;
+                                (((0 <= j_0) && (j_0 < na)) ==>
+                                  ((c + j_0).intM == (a + j_0).intM))));
+         behavior default:
+           invariant (_C_17 : (\forall int32 j_1;
+                                (((na <= j_1) && (j_1 < i_0)) ==>
+                                  ((c + j_1).intM == (b + (j_1 - na)).intM))));
+         variant (_C_16 : ((na + nb) - i_0));
+         while (true)
+         {  
+            {  (if (i_0 < (_C_23 : ((_C_22 : (na + nb)) :> int32))) then () else 
+               (goto while_0_break_0));
+               
+               {  (_C_30 : ((_C_29 : (_C_28 : (c + i_0)).intM) = (_C_27 : 
+                                                                 (_C_26 : 
+                                                                 (b +
+                                                                   (_C_25 : (
+                                                                   (_C_24 : 
+                                                                   (i_0 -
+                                                                    na)) :> int32)))).intM)))
+               };
+               (_C_33 : (i_0 = (_C_32 : ((_C_31 : (i_0 + 1)) :> int32))))
+            }
+         };
+         (while_0_break_0 : ())
+      };
+      
+      (return ())
+   }
+}

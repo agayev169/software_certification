@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="4">
+<prover id="0" name="Alt-Ergo" version="2.2.0" timelimit="5" steplimit="0" memlimit="1000"/>
+<file name="../is_sorted.mlw" expanded="true">
+<theory name="Jessie_model" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
+</theory>
+<theory name="Jessie_program" sum="5263121a1958ed87ba387fa5f5078bd8" expanded="true">
+ <goal name="WP_parameter is_sorted_ensures_default" expl="Function is_sorted, default behavior" expanded="true">
+ <proof prover="0"><result status="valid" time="0.06" steps="110"/></proof>
+ </goal>
+ <goal name="WP_parameter is_sorted_ensures_false_" expl="Function is_sorted, Behavior `false_&apos;" expanded="true">
+ <proof prover="0"><result status="valid" time="0.04" steps="86"/></proof>
+ </goal>
+ <goal name="WP_parameter is_sorted_ensures_true_" expl="Function is_sorted, Behavior `true_&apos;" expanded="true">
+ <proof prover="0"><result status="valid" time="0.03" steps="50"/></proof>
+ </goal>
+ <goal name="WP_parameter is_sorted_safety" expl="Function is_sorted, Safety" expanded="true">
+ <proof prover="0"><result status="valid" time="0.04" steps="60"/></proof>
+ </goal>
+</theory>
+</file>
+</why3session>
