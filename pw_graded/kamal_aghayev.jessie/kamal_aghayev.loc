@@ -1,0 +1,1297 @@
+[decreasing_ensures_true_]
+name = "Function decreasing"
+behavior = "Behavior `true_'"
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 76
+begin = 4
+end = 14
+
+[JC_176]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 96
+begin = 12
+end = 24
+
+[JC_177]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 99
+begin = 12
+end = 25
+
+[JC_94]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 50
+begin = 28
+end = 34
+
+[JC_73]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 51
+begin = 23
+end = 72
+
+[JC_158]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 185
+begin = 9
+end = 984
+
+[JC_63]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_80]
+kind = PointerDeref
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 55
+begin = 12
+end = 18
+
+[JC_51]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 75
+begin = 6
+end = 771
+
+[JC_71]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 46
+begin = 12
+end = 24
+
+[JC_147]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 78
+begin = 28
+end = 34
+
+[JC_151]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 185
+begin = 9
+end = 984
+
+[JC_45]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 27
+begin = 21
+end = 26
+
+[JC_123]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 71
+begin = 12
+end = 24
+
+[JC_106]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 65
+begin = 13
+end = 36
+
+[JC_143]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 185
+begin = 9
+end = 984
+
+[JC_113]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 66
+begin = 13
+end = 18
+
+[JC_116]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_64]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 106
+begin = 10
+end = 18
+
+[JC_133]
+kind = PointerDeref
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 83
+begin = 12
+end = 18
+
+[JC_188]
+kind = UserCall
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 107
+begin = 8
+end = 26
+
+[monotomic_safety]
+name = "Function monotomic"
+behavior = "Safety"
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 105
+begin = 4
+end = 13
+
+[increasing_ensures_false_]
+name = "Function increasing"
+behavior = "Behavior `false_'"
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 48
+begin = 4
+end = 14
+
+[JC_180]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 103
+begin = 12
+end = 24
+
+[JC_99]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 51
+begin = 23
+end = 72
+
+[JC_85]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 51
+begin = 23
+end = 72
+
+[JC_126]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 79
+begin = 23
+end = 72
+
+[JC_170]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 222
+begin = 10
+end = 18
+
+[JC_31]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 21
+begin = 12
+end = 55
+
+[JC_17]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_122]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 71
+begin = 12
+end = 24
+
+[JC_81]
+kind = ArithOverflow
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 55
+begin = 26
+end = 31
+
+[JC_55]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 38
+begin = 13
+end = 18
+
+[JC_138]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 79
+begin = 23
+end = 72
+
+[JC_134]
+kind = ArithOverflow
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 83
+begin = 26
+end = 31
+
+[JC_148]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 78
+begin = 23
+end = 34
+
+[JC_137]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 80
+begin = 21
+end = 26
+
+[JC_48]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 25
+begin = 28
+end = 34
+
+[JC_23]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_22]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 19
+begin = 13
+end = 33
+
+[JC_172]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 222
+begin = 10
+end = 18
+
+[JC_121]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_5]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 3
+begin = 12
+end = 24
+
+[monotomic_ensures_decreasing]
+name = "Function monotomic"
+behavior = "Behavior `decreasing'"
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 105
+begin = 4
+end = 13
+
+[JC_125]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 74
+begin = 12
+end = 24
+
+[JC_67]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_9]
+file = "/home/agayev169/software_certification/pw_graded/"
+line = 0
+begin = -1
+end = -1
+
+[JC_75]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 50
+begin = 28
+end = 34
+
+[JC_24]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_25]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 18
+begin = 13
+end = 18
+
+[JC_189]
+kind = UserCall
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 106
+begin = 8
+end = 26
+
+[JC_186]
+kind = UserCall
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 107
+begin = 8
+end = 26
+
+[JC_78]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 126
+begin = 9
+end = 1066
+
+[JC_175]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 96
+begin = 12
+end = 24
+
+[JC_41]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 75
+begin = 6
+end = 771
+
+[JC_74]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 50
+begin = 23
+end = 29
+
+[JC_47]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 25
+begin = 23
+end = 29
+
+[JC_52]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 75
+begin = 6
+end = 771
+
+[JC_26]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 18
+begin = 17
+end = 31
+
+[JC_8]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 6
+begin = 12
+end = 56
+
+[JC_154]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 78
+begin = 28
+end = 34
+
+[JC_54]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 37
+begin = 13
+end = 36
+
+[decreasing_ensures_default]
+name = "Function decreasing"
+behavior = "default behavior"
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 76
+begin = 4
+end = 14
+
+[JC_79]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 126
+begin = 9
+end = 1066
+
+[monotomic_ensures_default]
+name = "Function monotomic"
+behavior = "default behavior"
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 105
+begin = 4
+end = 13
+
+[JC_13]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 5
+begin = 12
+end = 24
+
+[JC_130]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_82]
+kind = PointerDeref
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 55
+begin = 22
+end = 32
+
+[JC_174]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_163]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_153]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 78
+begin = 23
+end = 29
+
+[JC_87]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 50
+begin = 28
+end = 34
+
+[JC_11]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 3
+begin = 12
+end = 24
+
+[JC_185]
+kind = UserCall
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 106
+begin = 8
+end = 26
+
+[JC_184]
+kind = UserCall
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 107
+begin = 8
+end = 26
+
+[JC_167]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_98]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 126
+begin = 9
+end = 1066
+
+[JC_70]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 43
+begin = 12
+end = 24
+
+[JC_15]
+file = "/home/agayev169/software_certification/pw_graded/"
+line = 0
+begin = -1
+end = -1
+
+[JC_36]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 25
+begin = 23
+end = 29
+
+[JC_182]
+kind = UserCall
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 107
+begin = 8
+end = 26
+
+[increasing_ensures_default]
+name = "Function increasing"
+behavior = "default behavior"
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 48
+begin = 4
+end = 14
+
+[JC_168]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_104]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 126
+begin = 9
+end = 1066
+
+[JC_91]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 126
+begin = 9
+end = 1066
+
+[JC_39]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_112]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 65
+begin = 13
+end = 36
+
+[JC_40]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 75
+begin = 6
+end = 771
+
+[JC_162]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_135]
+kind = PointerDeref
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 83
+begin = 22
+end = 32
+
+[JC_169]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_83]
+kind = ArithOverflow
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 54
+begin = 27
+end = 30
+
+[JC_35]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 26
+begin = 23
+end = 66
+
+[JC_132]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 185
+begin = 9
+end = 984
+
+[JC_27]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 19
+begin = 13
+end = 33
+
+[JC_115]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_109]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_107]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 65
+begin = 13
+end = 36
+
+[JC_69]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 43
+begin = 12
+end = 24
+
+[double__ensures_default]
+name = "Function double_"
+behavior = "default behavior"
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 23
+begin = 5
+end = 12
+
+[JC_179]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 103
+begin = 12
+end = 24
+
+[JC_124]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 74
+begin = 12
+end = 24
+
+[JC_38]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 25
+begin = 23
+end = 34
+
+[JC_12]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 4
+begin = 12
+end = 24
+
+[JC_6]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 4
+begin = 12
+end = 24
+
+[JC_156]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_127]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 78
+begin = 23
+end = 29
+
+[JC_171]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_164]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 90
+begin = 13
+end = 36
+
+[JC_44]
+kind = ArithOverflow
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 29
+begin = 27
+end = 30
+
+[JC_155]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 78
+begin = 23
+end = 34
+
+[double__safety]
+name = "Function double_"
+behavior = "Safety"
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 23
+begin = 5
+end = 12
+
+[JC_4]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_62]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_101]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 50
+begin = 28
+end = 34
+
+[JC_88]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 50
+begin = 23
+end = 34
+
+[JC_129]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 78
+begin = 23
+end = 34
+
+[JC_42]
+kind = ArithOverflow
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 30
+begin = 15
+end = 20
+
+[JC_190]
+kind = UserCall
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 107
+begin = 8
+end = 26
+
+[JC_178]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 99
+begin = 12
+end = 25
+
+[JC_110]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_166]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 91
+begin = 13
+end = 18
+
+[decreasing_safety]
+name = "Function decreasing"
+behavior = "Safety"
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 76
+begin = 4
+end = 14
+
+[JC_103]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_46]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 26
+begin = 23
+end = 66
+
+[JC_141]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 78
+begin = 23
+end = 34
+
+[JC_61]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_32]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 21
+begin = 12
+end = 55
+
+[JC_56]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_33]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[monotomic_ensures_increaing]
+name = "Function monotomic"
+behavior = "Behavior `increaing'"
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 105
+begin = 4
+end = 13
+
+[JC_65]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_118]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_173]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_105]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 126
+begin = 9
+end = 1066
+
+[JC_140]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 78
+begin = 28
+end = 34
+
+[increasing_ensures_true_]
+name = "Function increasing"
+behavior = "Behavior `true_'"
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 48
+begin = 4
+end = 14
+
+[JC_29]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[max3_ensures_default]
+name = "Function max3"
+behavior = "default behavior"
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 9
+begin = 4
+end = 8
+
+[JC_144]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 185
+begin = 9
+end = 984
+
+[JC_159]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 90
+begin = 13
+end = 36
+
+[JC_68]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_7]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 5
+begin = 12
+end = 24
+
+[JC_16]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 36
+begin = 10
+end = 18
+
+[JC_96]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_43]
+kind = PointerDeref
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 88
+begin = 25
+end = 220
+
+[JC_2]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_95]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 50
+begin = 23
+end = 34
+
+[JC_93]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 50
+begin = 23
+end = 29
+
+[JC_97]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 126
+begin = 9
+end = 1066
+
+[JC_84]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 52
+begin = 21
+end = 26
+
+[JC_160]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 90
+begin = 13
+end = 36
+
+[JC_128]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 78
+begin = 28
+end = 34
+
+[JC_34]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_114]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_14]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 6
+begin = 12
+end = 56
+
+[JC_150]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 185
+begin = 9
+end = 984
+
+[JC_117]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 165
+begin = 10
+end = 18
+
+[JC_90]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 126
+begin = 9
+end = 1066
+
+[JC_53]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 37
+begin = 13
+end = 36
+
+[JC_157]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 185
+begin = 9
+end = 984
+
+[JC_145]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 79
+begin = 23
+end = 72
+
+[JC_21]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 19
+begin = 13
+end = 33
+
+[JC_149]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_111]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 65
+begin = 13
+end = 36
+
+[JC_77]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_49]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 25
+begin = 23
+end = 34
+
+[JC_1]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 9
+begin = 4
+end = 8
+
+[JC_131]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 185
+begin = 9
+end = 984
+
+[JC_102]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 50
+begin = 23
+end = 34
+
+[JC_37]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 25
+begin = 28
+end = 34
+
+[JC_181]
+kind = UserCall
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 106
+begin = 8
+end = 26
+
+[JC_142]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_10]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 36
+begin = 10
+end = 18
+
+[JC_108]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 66
+begin = 13
+end = 18
+
+[JC_57]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_161]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 91
+begin = 13
+end = 18
+
+[decreasing_ensures_false_]
+name = "Function decreasing"
+behavior = "Behavior `false_'"
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 76
+begin = 4
+end = 14
+
+[JC_146]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 78
+begin = 23
+end = 29
+
+[JC_89]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_136]
+kind = ArithOverflow
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 82
+begin = 27
+end = 30
+
+[JC_66]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 106
+begin = 10
+end = 18
+
+[JC_59]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 37
+begin = 13
+end = 36
+
+[JC_20]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 18
+begin = 17
+end = 31
+
+[JC_165]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 90
+begin = 13
+end = 36
+
+[JC_18]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_3]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 9
+begin = 4
+end = 8
+
+[JC_92]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 51
+begin = 23
+end = 72
+
+[JC_152]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 79
+begin = 23
+end = 72
+
+[JC_86]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 50
+begin = 23
+end = 29
+
+[JC_60]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 38
+begin = 13
+end = 18
+
+[JC_183]
+kind = UserCall
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 106
+begin = 8
+end = 26
+
+[JC_139]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 78
+begin = 23
+end = 29
+
+[JC_72]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 46
+begin = 12
+end = 24
+
+[JC_19]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 18
+begin = 13
+end = 18
+
+[JC_119]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc"
+line = 165
+begin = 10
+end = 18
+
+[JC_187]
+kind = UserCall
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 106
+begin = 8
+end = 26
+
+[JC_76]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 50
+begin = 23
+end = 34
+
+[monotomic_ensures_none]
+name = "Function monotomic"
+behavior = "Behavior `none'"
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 105
+begin = 4
+end = 13
+
+[JC_50]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[increasing_safety]
+name = "Function increasing"
+behavior = "Safety"
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 48
+begin = 4
+end = 14
+
+[JC_30]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[max3_safety]
+name = "Function max3"
+behavior = "Safety"
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 9
+begin = 4
+end = 8
+
+[JC_120]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/"
+line = 0
+begin = -1
+end = -1
+
+[JC_58]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 37
+begin = 13
+end = 36
+
+[JC_100]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 50
+begin = 23
+end = 29
+
+[JC_28]
+file = "/home/agayev169/software_certification/pw_graded/kamal_aghayev.c"
+line = 19
+begin = 13
+end = 33
+

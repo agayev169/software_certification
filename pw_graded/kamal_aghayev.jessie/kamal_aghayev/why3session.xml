@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="4">
+<prover id="0" name="Alt-Ergo" version="2.2.0" timelimit="5" steplimit="0" memlimit="1000"/>
+<file name="../kamal_aghayev.mlw" expanded="true">
+<theory name="Jessie_model" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
+</theory>
+<theory name="Jessie_program" sum="da69f7683f18b39c24abd033d627787d" expanded="true">
+ <goal name="WP_parameter decreasing_ensures_default" expl="Function decreasing, default behavior">
+ <proof prover="0"><result status="valid" time="0.10" steps="157"/></proof>
+ </goal>
+ <goal name="WP_parameter decreasing_ensures_false_" expl="Function decreasing, Behavior `false_&apos;">
+ <proof prover="0"><result status="valid" time="0.04" steps="86"/></proof>
+ </goal>
+ <goal name="WP_parameter decreasing_ensures_true_" expl="Function decreasing, Behavior `true_&apos;">
+ <proof prover="0"><result status="valid" time="0.04" steps="50"/></proof>
+ </goal>
+ <goal name="WP_parameter decreasing_safety" expl="Function decreasing, Safety">
+ <proof prover="0"><result status="valid" time="0.04" steps="60"/></proof>
+ </goal>
+ <goal name="WP_parameter double__ensures_default" expl="Function double_, default behavior">
+ <proof prover="0"><result status="valid" time="0.07" steps="155"/></proof>
+ </goal>
+ <goal name="WP_parameter double__safety" expl="Function double_, Safety">
+ <proof prover="0"><result status="valid" time="0.02" steps="36"/></proof>
+ </goal>
+ <goal name="WP_parameter increasing_ensures_default" expl="Function increasing, default behavior">
+ <proof prover="0"><result status="valid" time="0.07" steps="157"/></proof>
+ </goal>
+ <goal name="WP_parameter increasing_ensures_false_" expl="Function increasing, Behavior `false_&apos;">
+ <proof prover="0"><result status="valid" time="0.04" steps="86"/></proof>
+ </goal>
+ <goal name="WP_parameter increasing_ensures_true_" expl="Function increasing, Behavior `true_&apos;">
+ <proof prover="0"><result status="valid" time="0.03" steps="50"/></proof>
+ </goal>
+ <goal name="WP_parameter increasing_safety" expl="Function increasing, Safety">
+ <proof prover="0"><result status="valid" time="0.04" steps="60"/></proof>
+ </goal>
+ <goal name="WP_parameter max3_ensures_default" expl="Function max3, default behavior">
+ <proof prover="0"><result status="valid" time="0.04" steps="19"/></proof>
+ </goal>
+ <goal name="WP_parameter max3_safety" expl="Function max3, Safety">
+ <proof prover="0"><result status="valid" time="0.04" steps="12"/></proof>
+ </goal>
+ <goal name="WP_parameter monotomic_ensures_decreasing" expl="Function monotomic, Behavior `decreasing&apos;" expanded="true">
+ <transf name="split_goal_wp" expanded="true">
+  <goal name="WP_parameter monotomic_ensures_decreasing.1" expl="postcondition">
+  <proof prover="0"><result status="unknown" time="0.06"/></proof>
+  <transf name="introduce_premises">
+   <goal name="WP_parameter monotomic_ensures_decreasing.1.1" expl="postcondition">
+   <proof prover="0" timelimit="20"><result status="unknown" time="0.06"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="WP_parameter monotomic_ensures_decreasing.2" expl="postcondition">
+  <proof prover="0"><result status="valid" time="0.03" steps="32"/></proof>
+  </goal>
+  <goal name="WP_parameter monotomic_ensures_decreasing.3" expl="postcondition">
+  <proof prover="0"><result status="valid" time="0.05" steps="84"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="WP_parameter monotomic_ensures_default" expl="Function monotomic, default behavior">
+ <proof prover="0"><result status="valid" time="0.03" steps="12"/></proof>
+ </goal>
+ <goal name="WP_parameter monotomic_ensures_increaing" expl="Function monotomic, Behavior `increaing&apos;">
+ <proof prover="0"><result status="valid" time="0.04" steps="49"/></proof>
+ </goal>
+ <goal name="WP_parameter monotomic_ensures_none" expl="Function monotomic, Behavior `none&apos;">
+ <proof prover="0"><result status="valid" time="0.07" steps="188"/></proof>
+ </goal>
+ <goal name="WP_parameter monotomic_safety" expl="Function monotomic, Safety">
+ <proof prover="0"><result status="valid" time="0.03" steps="20"/></proof>
+ </goal>
+</theory>
+</file>
+</why3session>

@@ -1,0 +1,1872 @@
+theory Jessie_model
+
+use import int.Int
+
+use bool.Bool
+
+use import jessie_why3theories.Jessie_memory_model
+
+type charP
+
+type int32
+
+type int8
+
+type intP
+
+type padding
+
+type voidP
+
+function charP_tag  : (tag_id charP)
+
+axiom charP_int "charP_int": ((int_of_tag charP_tag) = (1))
+
+function charP_of_pointer_address (pointer ()) : (pointer charP)
+
+axiom charP_of_pointer_address_of_pointer_addr "charP_of_pointer_address_of_pointer_addr":
+ (forall p:(pointer charP).
+  (p = (charP_of_pointer_address (pointer_address p))))
+
+axiom charP_parenttag_bottom "charP_parenttag_bottom":
+ (parenttag charP_tag bottom_tag)
+
+axiom charP_tags "charP_tags":
+ (forall x:(pointer charP).
+  (forall charP_tag_table:(tag_table charP).
+   (instanceof charP_tag_table x charP_tag)))
+
+function integer_of_int32 int32 : int
+
+predicate eq_int32(x:int32) (y:int32) =
+ ((integer_of_int32 x) = (integer_of_int32 y))
+
+function integer_of_int8 int8 : int
+
+predicate eq_int8(x:int8) (y:int8) =
+ ((integer_of_int8 x) = (integer_of_int8 y))
+
+function int32_of_integer int : int32
+
+axiom int32_coerce "int32_coerce":
+ (forall x:int.
+  (((Int.(<=) (-2147483648) x) /\ (Int.(<=) x (2147483647))) ->
+   ((integer_of_int32 (int32_of_integer x)) = x)))
+
+axiom int32_extensionality "int32_extensionality":
+ (forall x:int32.
+  (forall y:int32[((integer_of_int32 x) = (integer_of_int32 y))].
+   (((integer_of_int32 x) = (integer_of_int32 y)) -> (x = y))))
+
+axiom int32_range "int32_range":
+ (forall x:int32.
+  ((Int.(<=) (-2147483648) (integer_of_int32 x))
+  /\ (Int.(<=) (integer_of_int32 x) (2147483647))))
+
+function int8_of_integer int : int8
+
+axiom int8_coerce "int8_coerce":
+ (forall x:int.
+  (((Int.(<=) (-128) x) /\ (Int.(<=) x (127))) ->
+   ((integer_of_int8 (int8_of_integer x)) = x)))
+
+axiom int8_extensionality "int8_extensionality":
+ (forall x:int8.
+  (forall y:int8[((integer_of_int8 x) = (integer_of_int8 y))].
+   (((integer_of_int8 x) = (integer_of_int8 y)) -> (x = y))))
+
+axiom int8_range "int8_range":
+ (forall x:int8.
+  ((Int.(<=) (-128) (integer_of_int8 x))
+  /\ (Int.(<=) (integer_of_int8 x) (127))))
+
+function intP_tag  : (tag_id intP)
+
+axiom intP_int "intP_int": ((int_of_tag intP_tag) = (1))
+
+function intP_of_pointer_address (pointer ()) : (pointer intP)
+
+axiom intP_of_pointer_address_of_pointer_addr "intP_of_pointer_address_of_pointer_addr":
+ (forall p:(pointer intP).
+  (p = (intP_of_pointer_address (pointer_address p))))
+
+axiom intP_parenttag_bottom "intP_parenttag_bottom":
+ (parenttag intP_tag bottom_tag)
+
+axiom intP_tags "intP_tags":
+ (forall x:(pointer intP).
+  (forall intP_tag_table:(tag_table intP).
+   (instanceof intP_tag_table x intP_tag)))
+
+predicate left_valid_struct_charP(p:(pointer charP)) (a:int) (charP_alloc_table:(alloc_table charP)) =
+ ((offset_min charP_alloc_table p) <= a)
+
+predicate left_valid_struct_intP(p:(pointer intP)) (a:int) (intP_alloc_table:(alloc_table intP)) =
+ ((offset_min intP_alloc_table p) <= a)
+
+predicate left_valid_struct_voidP(p:(pointer voidP)) (a:int) (voidP_alloc_table:(alloc_table voidP)) =
+ ((offset_min voidP_alloc_table p) <= a)
+
+axiom pointer_addr_of_charP_of_pointer_address "pointer_addr_of_charP_of_pointer_address":
+ (forall p:(pointer ()).
+  (p = (pointer_address (charP_of_pointer_address p))))
+
+axiom pointer_addr_of_intP_of_pointer_address "pointer_addr_of_intP_of_pointer_address":
+ (forall p:(pointer ()). (p = (pointer_address (intP_of_pointer_address p))))
+
+function voidP_of_pointer_address (pointer ()) : (pointer voidP)
+
+axiom pointer_addr_of_voidP_of_pointer_address "pointer_addr_of_voidP_of_pointer_address":
+ (forall p:(pointer ()).
+  (p = (pointer_address (voidP_of_pointer_address p))))
+
+predicate right_valid_struct_charP(p:(pointer charP)) (b:int) (charP_alloc_table:(alloc_table charP)) =
+ ((offset_max charP_alloc_table p) >= b)
+
+predicate right_valid_struct_intP(p:(pointer intP)) (b:int) (intP_alloc_table:(alloc_table intP)) =
+ ((offset_max intP_alloc_table p) >= b)
+
+predicate right_valid_struct_voidP(p:(pointer voidP)) (b:int) (voidP_alloc_table:(alloc_table voidP)) =
+ ((offset_max voidP_alloc_table p) >= b)
+
+predicate strict_valid_root_charP(p:(pointer charP)) (a:int) (b:int) (charP_alloc_table:(alloc_table charP)) =
+ (((offset_min charP_alloc_table p) = a)
+ /\ ((offset_max charP_alloc_table p) = b))
+
+predicate strict_valid_root_intP(p:(pointer intP)) (a:int) (b:int) (intP_alloc_table:(alloc_table intP)) =
+ (((offset_min intP_alloc_table p) = a)
+ /\ ((offset_max intP_alloc_table p) = b))
+
+predicate strict_valid_root_voidP(p:(pointer voidP)) (a:int) (b:int) (voidP_alloc_table:(alloc_table voidP)) =
+ (((offset_min voidP_alloc_table p) = a)
+ /\ ((offset_max voidP_alloc_table p) = b))
+
+predicate strict_valid_struct_charP(p:(pointer charP)) (a:int) (b:int) (charP_alloc_table:(alloc_table charP)) =
+ (((offset_min charP_alloc_table p) = a)
+ /\ ((offset_max charP_alloc_table p) = b))
+
+predicate strict_valid_struct_intP(p:(pointer intP)) (a:int) (b:int) (intP_alloc_table:(alloc_table intP)) =
+ (((offset_min intP_alloc_table p) = a)
+ /\ ((offset_max intP_alloc_table p) = b))
+
+predicate strict_valid_struct_voidP(p:(pointer voidP)) (a:int) (b:int) (voidP_alloc_table:(alloc_table voidP)) =
+ (((offset_min voidP_alloc_table p) = a)
+ /\ ((offset_max voidP_alloc_table p) = b))
+
+predicate valid_root_charP(p:(pointer charP)) (a:int) (b:int) (charP_alloc_table:(alloc_table charP)) =
+ (((offset_min charP_alloc_table p) <= a)
+ /\ ((offset_max charP_alloc_table p) >= b))
+
+predicate valid_root_intP(p:(pointer intP)) (a:int) (b:int) (intP_alloc_table:(alloc_table intP)) =
+ (((offset_min intP_alloc_table p) <= a)
+ /\ ((offset_max intP_alloc_table p) >= b))
+
+predicate valid_root_voidP(p:(pointer voidP)) (a:int) (b:int) (voidP_alloc_table:(alloc_table voidP)) =
+ (((offset_min voidP_alloc_table p) <= a)
+ /\ ((offset_max voidP_alloc_table p) >= b))
+
+predicate valid_struct_charP(p:(pointer charP)) (a:int) (b:int) (charP_alloc_table:(alloc_table charP)) =
+ (((offset_min charP_alloc_table p) <= a)
+ /\ ((offset_max charP_alloc_table p) >= b))
+
+predicate valid_struct_intP(p:(pointer intP)) (a:int) (b:int) (intP_alloc_table:(alloc_table intP)) =
+ (((offset_min intP_alloc_table p) <= a)
+ /\ ((offset_max intP_alloc_table p) >= b))
+
+predicate valid_struct_voidP(p:(pointer voidP)) (a:int) (b:int) (voidP_alloc_table:(alloc_table voidP)) =
+ (((offset_min voidP_alloc_table p) <= a)
+ /\ ((offset_max voidP_alloc_table p) >= b))
+
+function voidP_tag  : (tag_id voidP)
+
+axiom voidP_int "voidP_int": ((int_of_tag voidP_tag) = (1))
+
+axiom voidP_of_pointer_address_of_pointer_addr "voidP_of_pointer_address_of_pointer_addr":
+ (forall p:(pointer voidP).
+  (p = (voidP_of_pointer_address (pointer_address p))))
+
+axiom voidP_parenttag_bottom "voidP_parenttag_bottom":
+ (parenttag voidP_tag bottom_tag)
+
+axiom voidP_tags "voidP_tags":
+ (forall x:(pointer voidP).
+  (forall voidP_tag_table:(tag_table voidP).
+   (instanceof voidP_tag_table x voidP_tag)))
+
+end
+
+module Jessie_program
+
+use import int.Int
+
+use bool.Bool
+
+use import jessie_why3theories.Jessie_memory_model
+
+use import Jessie_model
+
+use import ref.Ref
+
+use import jessie_why3.JessieDivision
+
+use import jessie_why3.Jessie_memory_model_parameters
+
+exception Goto_while_0_break_exc ()
+
+exception Loop_continue_exc ()
+
+exception Loop_exit_exc ()
+
+exception Return_label_exc ()
+
+val charP_alloc_table : ref (alloc_table charP)
+
+val charP_tag_table : ref (tag_table charP)
+
+val alloc_struct_charP
+ (n:int)
+  (charP_alloc_table:ref (alloc_table charP))
+   (charP_tag_table:ref (tag_table charP)) : (pointer charP)
+    requires { true } writes { charP_alloc_table, charP_tag_table }
+     ensures { ((strict_valid_struct_charP result (0) (Int.(-) n (1))
+                !charP_alloc_table)
+               /\ ((alloc_extends (old !charP_alloc_table)
+                   !charP_alloc_table)
+                  /\ ((alloc_fresh (old !charP_alloc_table) result n)
+                     /\ (instanceof !charP_tag_table result charP_tag)))) }
+
+val alloc_struct_charP_requires
+ (n:int)
+  (charP_alloc_table:ref (alloc_table charP))
+   (charP_tag_table:ref (tag_table charP)) : (pointer charP)
+    requires { (Int.(>=) n (0)) } writes { charP_alloc_table,
+    charP_tag_table }
+     ensures { ((strict_valid_struct_charP result (0) (Int.(-) n (1))
+                !charP_alloc_table)
+               /\ ((alloc_extends (old !charP_alloc_table)
+                   !charP_alloc_table)
+                  /\ ((alloc_fresh (old !charP_alloc_table) result n)
+                     /\ (instanceof !charP_tag_table result charP_tag)))) }
+
+val intP_alloc_table : ref (alloc_table intP)
+
+val intP_tag_table : ref (tag_table intP)
+
+val alloc_struct_intP
+ (n:int)
+  (intP_alloc_table:ref (alloc_table intP))
+   (intP_tag_table:ref (tag_table intP)) : (pointer intP)
+    requires { true } writes { intP_alloc_table, intP_tag_table }
+     ensures { ((strict_valid_struct_intP result (0) (Int.(-) n (1))
+                !intP_alloc_table)
+               /\ ((alloc_extends (old !intP_alloc_table) !intP_alloc_table)
+                  /\ ((alloc_fresh (old !intP_alloc_table) result n)
+                     /\ (instanceof !intP_tag_table result intP_tag)))) }
+
+val alloc_struct_intP_requires
+ (n:int)
+  (intP_alloc_table:ref (alloc_table intP))
+   (intP_tag_table:ref (tag_table intP)) : (pointer intP)
+    requires { (Int.(>=) n (0)) } writes { intP_alloc_table, intP_tag_table }
+     ensures { ((strict_valid_struct_intP result (0) (Int.(-) n (1))
+                !intP_alloc_table)
+               /\ ((alloc_extends (old !intP_alloc_table) !intP_alloc_table)
+                  /\ ((alloc_fresh (old !intP_alloc_table) result n)
+                     /\ (instanceof !intP_tag_table result intP_tag)))) }
+
+val voidP_alloc_table : ref (alloc_table voidP)
+
+val voidP_tag_table : ref (tag_table voidP)
+
+val alloc_struct_voidP
+ (n:int)
+  (voidP_alloc_table:ref (alloc_table voidP))
+   (voidP_tag_table:ref (tag_table voidP)) : (pointer voidP)
+    requires { true } writes { voidP_alloc_table, voidP_tag_table }
+     ensures { ((strict_valid_struct_voidP result (0) (Int.(-) n (1))
+                !voidP_alloc_table)
+               /\ ((alloc_extends (old !voidP_alloc_table)
+                   !voidP_alloc_table)
+                  /\ ((alloc_fresh (old !voidP_alloc_table) result n)
+                     /\ (instanceof !voidP_tag_table result voidP_tag)))) }
+
+val alloc_struct_voidP_requires
+ (n:int)
+  (voidP_alloc_table:ref (alloc_table voidP))
+   (voidP_tag_table:ref (tag_table voidP)) : (pointer voidP)
+    requires { (Int.(>=) n (0)) } writes { voidP_alloc_table,
+    voidP_tag_table }
+     ensures { ((strict_valid_struct_voidP result (0) (Int.(-) n (1))
+                !voidP_alloc_table)
+               /\ ((alloc_extends (old !voidP_alloc_table)
+                   !voidP_alloc_table)
+                  /\ ((alloc_fresh (old !voidP_alloc_table) result n)
+                     /\ (instanceof !voidP_tag_table result voidP_tag)))) }
+
+val any_int32 (_anonymous:()) : int32 requires { true }  ensures { true }
+
+val any_int8 (_anonymous:()) : int8 requires { true }  ensures { true }
+
+val decreasing
+ (arr:(pointer intP))
+  (n:int32)
+   (intP_arr_3_alloc_table:(alloc_table intP))
+    (intP_intM_arr_3:(memory intP int32)) : int32
+     requires { true }
+      ensures { (((exists i_2:int32.
+                   ((Int.(<=) (1) (integer_of_int32 i_2))
+                   /\ ((Int.(<) (integer_of_int32 i_2) (integer_of_int32 n))
+                      /\ (Int.(>=)
+                         (integer_of_int32
+                         (select intP_intM_arr_3
+                         (shift arr (integer_of_int32 i_2))))
+                         (integer_of_int32
+                         (select intP_intM_arr_3
+                         (shift arr (Int.(-) (integer_of_int32 i_2) (1))))))))) ->
+                  (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 74 12 24#
+                  ((integer_of_int32 result) = (0))))
+                /\ ((forall i_3:int32.
+                     (((Int.(<=) (1) (integer_of_int32 i_3))
+                      /\ (Int.(<) (integer_of_int32 i_3)
+                         (integer_of_int32 n))) ->
+                      (Int.(<)
+                      (integer_of_int32
+                      (select intP_intM_arr_3
+                      (shift arr (integer_of_int32 i_3))))
+                      (integer_of_int32
+                      (select intP_intM_arr_3
+                      (shift arr (Int.(-) (integer_of_int32 i_3) (1)))))))) ->
+                    (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 71 12 24#
+                    ((integer_of_int32 result) = (1))))) }
+
+val decreasing_requires
+ (arr:(pointer intP))
+  (n:int32)
+   (intP_arr_3_alloc_table:(alloc_table intP))
+    (intP_intM_arr_3:(memory intP int32)) : int32
+     requires { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/" 0 0 0#
+                ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 65 13 36#
+                 (Int.(<=) (offset_min intP_arr_3_alloc_table arr) (0)))
+                /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 65 13 36#
+                    (Int.(>=) (offset_max intP_arr_3_alloc_table arr)
+                    (Int.(-) (integer_of_int32 n) (1))))
+                   /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 66 13 18#
+                      (Int.(>) (integer_of_int32 n) (0)))))) }
+      ensures { (((exists i_2:int32.
+                   ((Int.(<=) (1) (integer_of_int32 i_2))
+                   /\ ((Int.(<) (integer_of_int32 i_2) (integer_of_int32 n))
+                      /\ (Int.(>=)
+                         (integer_of_int32
+                         (select intP_intM_arr_3
+                         (shift arr (integer_of_int32 i_2))))
+                         (integer_of_int32
+                         (select intP_intM_arr_3
+                         (shift arr (Int.(-) (integer_of_int32 i_2) (1))))))))) ->
+                  (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 74 12 24#
+                  ((integer_of_int32 result) = (0))))
+                /\ ((forall i_3:int32.
+                     (((Int.(<=) (1) (integer_of_int32 i_3))
+                      /\ (Int.(<) (integer_of_int32 i_3)
+                         (integer_of_int32 n))) ->
+                      (Int.(<)
+                      (integer_of_int32
+                      (select intP_intM_arr_3
+                      (shift arr (integer_of_int32 i_3))))
+                      (integer_of_int32
+                      (select intP_intM_arr_3
+                      (shift arr (Int.(-) (integer_of_int32 i_3) (1)))))))) ->
+                    (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 71 12 24#
+                    ((integer_of_int32 result) = (1))))) }
+
+val double_
+ (t:(pointer intP))
+  (n_0:int32)
+   (intP_intM_t_1:ref (memory intP int32))
+    (intP_t_1_alloc_table:(alloc_table intP)) : ()
+     requires { true } reads { intP_intM_t_1 }  writes { intP_intM_t_1 }
+      ensures { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 21 12 55#
+                (forall i:int32.
+                 (((Int.(<=) (0) (integer_of_int32 i))
+                  /\ (Int.(<) (integer_of_int32 i) (integer_of_int32 n_0))) ->
+                  ((integer_of_int32
+                   (select !intP_intM_t_1 (shift t (integer_of_int32 i)))) = 
+                  (Int.(*) (2) (integer_of_int32 i)))))) }
+
+val double__requires
+ (t:(pointer intP))
+  (n_0:int32)
+   (intP_intM_t_1:ref (memory intP int32))
+    (intP_t_1_alloc_table:(alloc_table intP)) : ()
+     requires { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/" 0 0 0#
+                ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 18 13 18#
+                 (Int.(<) (0) (integer_of_int32 n_0)))
+                /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 18 17 31#
+                    (Int.(<=) (integer_of_int32 n_0) (100000000)))
+                   /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 19 13 33#
+                       (Int.(<=) (offset_min intP_t_1_alloc_table t) (0)))
+                      /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 19 13 33#
+                         (Int.(>=) (offset_max intP_t_1_alloc_table t)
+                         (Int.(-) (integer_of_int32 n_0) (1)))))))) }
+     reads { intP_intM_t_1 }  writes { intP_intM_t_1 }
+      ensures { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 21 12 55#
+                (forall i:int32.
+                 (((Int.(<=) (0) (integer_of_int32 i))
+                  /\ (Int.(<) (integer_of_int32 i) (integer_of_int32 n_0))) ->
+                  ((integer_of_int32
+                   (select !intP_intM_t_1 (shift t (integer_of_int32 i)))) = 
+                  (Int.(*) (2) (integer_of_int32 i)))))) }
+
+val increasing
+ (arr_0:(pointer intP))
+  (n_1:int32)
+   (intP_arr_0_2_alloc_table:(alloc_table intP))
+    (intP_intM_arr_0_2:(memory intP int32)) : int32
+     requires { true }
+      ensures { (((exists i_0_0:int32.
+                   ((Int.(<=) (1) (integer_of_int32 i_0_0))
+                   /\ ((Int.(<) (integer_of_int32 i_0_0)
+                       (integer_of_int32 n_1))
+                      /\ (Int.(<=)
+                         (integer_of_int32
+                         (select intP_intM_arr_0_2
+                         (shift arr_0 (integer_of_int32 i_0_0))))
+                         (integer_of_int32
+                         (select intP_intM_arr_0_2
+                         (shift arr_0 (Int.(-) (integer_of_int32 i_0_0) (1))))))))) ->
+                  (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 46 12 24#
+                  ((integer_of_int32 result) = (0))))
+                /\ ((forall i_1:int32.
+                     (((Int.(<=) (1) (integer_of_int32 i_1))
+                      /\ (Int.(<) (integer_of_int32 i_1)
+                         (integer_of_int32 n_1))) ->
+                      (Int.(>)
+                      (integer_of_int32
+                      (select intP_intM_arr_0_2
+                      (shift arr_0 (integer_of_int32 i_1))))
+                      (integer_of_int32
+                      (select intP_intM_arr_0_2
+                      (shift arr_0 (Int.(-) (integer_of_int32 i_1) (1)))))))) ->
+                    (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 43 12 24#
+                    ((integer_of_int32 result) = (1))))) }
+
+val increasing_requires
+ (arr_0:(pointer intP))
+  (n_1:int32)
+   (intP_arr_0_2_alloc_table:(alloc_table intP))
+    (intP_intM_arr_0_2:(memory intP int32)) : int32
+     requires { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/" 0 0 0#
+                ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 37 13 36#
+                 (Int.(<=) (offset_min intP_arr_0_2_alloc_table arr_0) (0)))
+                /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 37 13 36#
+                    (Int.(>=) (offset_max intP_arr_0_2_alloc_table arr_0)
+                    (Int.(-) (integer_of_int32 n_1) (1))))
+                   /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 38 13 18#
+                      (Int.(>) (integer_of_int32 n_1) (0)))))) }
+      ensures { (((exists i_0_0:int32.
+                   ((Int.(<=) (1) (integer_of_int32 i_0_0))
+                   /\ ((Int.(<) (integer_of_int32 i_0_0)
+                       (integer_of_int32 n_1))
+                      /\ (Int.(<=)
+                         (integer_of_int32
+                         (select intP_intM_arr_0_2
+                         (shift arr_0 (integer_of_int32 i_0_0))))
+                         (integer_of_int32
+                         (select intP_intM_arr_0_2
+                         (shift arr_0 (Int.(-) (integer_of_int32 i_0_0) (1))))))))) ->
+                  (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 46 12 24#
+                  ((integer_of_int32 result) = (0))))
+                /\ ((forall i_1:int32.
+                     (((Int.(<=) (1) (integer_of_int32 i_1))
+                      /\ (Int.(<) (integer_of_int32 i_1)
+                         (integer_of_int32 n_1))) ->
+                      (Int.(>)
+                      (integer_of_int32
+                      (select intP_intM_arr_0_2
+                      (shift arr_0 (integer_of_int32 i_1))))
+                      (integer_of_int32
+                      (select intP_intM_arr_0_2
+                      (shift arr_0 (Int.(-) (integer_of_int32 i_1) (1)))))))) ->
+                    (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 43 12 24#
+                    ((integer_of_int32 result) = (1))))) }
+
+val int32_of_integer_
+ (x:int) : int32
+  requires { ((Int.(<=) (-2147483648) x) /\ (Int.(<=) x (2147483647))) }
+   ensures { ((integer_of_int32 result) = x) }
+
+val int8_of_integer_
+ (x:int) : int8
+  requires { ((Int.(<=) (-128) x) /\ (Int.(<=) x (127))) }
+   ensures { ((integer_of_int8 result) = x) }
+
+val max3
+ (a:int32)
+  (b:int32)
+   (c:int32) : int32
+    requires { true }
+     ensures { (#"/home/agayev169/software_certification/pw_graded/" 0 0 0#
+               ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 3 12 24#
+                (Int.(>=) (integer_of_int32 result) (integer_of_int32 a)))
+               /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 4 12 24#
+                   (Int.(>=) (integer_of_int32 result) (integer_of_int32 b)))
+                  /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 5 12 24#
+                      (Int.(>=) (integer_of_int32 result)
+                      (integer_of_int32 c)))
+                     /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 6 12 56#
+                        (((integer_of_int32 result) = (integer_of_int32 a))
+                        \/ (((integer_of_int32 result) = (integer_of_int32 b))
+                           \/ ((integer_of_int32 result) = (integer_of_int32
+                                                           c))))))))) }
+
+val max3_requires
+ (a:int32)
+  (b:int32)
+   (c:int32) : int32
+    requires { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/" 0 0 0#
+               true) }
+     ensures { (#"/home/agayev169/software_certification/pw_graded/" 0 0 0#
+               ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 3 12 24#
+                (Int.(>=) (integer_of_int32 result) (integer_of_int32 a)))
+               /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 4 12 24#
+                   (Int.(>=) (integer_of_int32 result) (integer_of_int32 b)))
+                  /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 5 12 24#
+                      (Int.(>=) (integer_of_int32 result)
+                      (integer_of_int32 c)))
+                     /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 6 12 56#
+                        (((integer_of_int32 result) = (integer_of_int32 a))
+                        \/ (((integer_of_int32 result) = (integer_of_int32 b))
+                           \/ ((integer_of_int32 result) = (integer_of_int32
+                                                           c))))))))) }
+
+val monotomic
+ (arr_1:(pointer intP))
+  (n_2:int32)
+   (intP_arr_1_4_alloc_table:(alloc_table intP))
+    (intP_intM_arr_1_4:(memory intP int32)) : int32
+     requires { true }
+      ensures { ((((exists i_4:int32.
+                    ((Int.(<=) (1) (integer_of_int32 i_4))
+                    /\ ((Int.(<) (integer_of_int32 i_4)
+                        (integer_of_int32 n_2))
+                       /\ (Int.(<=)
+                          (integer_of_int32
+                          (select intP_intM_arr_1_4
+                          (shift arr_1 (integer_of_int32 i_4))))
+                          (integer_of_int32
+                          (select intP_intM_arr_1_4
+                          (shift arr_1 (Int.(-) (integer_of_int32 i_4) (1)))))))))
+                  /\ (exists i_5:int32.
+                      ((Int.(<=) (1) (integer_of_int32 i_5))
+                      /\ ((Int.(<) (integer_of_int32 i_5)
+                          (integer_of_int32 n_2))
+                         /\ (Int.(>=)
+                            (integer_of_int32
+                            (select intP_intM_arr_1_4
+                            (shift arr_1 (integer_of_int32 i_5))))
+                            (integer_of_int32
+                            (select intP_intM_arr_1_4
+                            (shift arr_1
+                            (Int.(-) (integer_of_int32 i_5) (1)))))))))) ->
+                  (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 103 12 24#
+                  ((integer_of_int32 result) = (0))))
+                /\ (((forall i_6:int32.
+                      (((Int.(<=) (1) (integer_of_int32 i_6))
+                       /\ (Int.(<) (integer_of_int32 i_6)
+                          (integer_of_int32 n_2))) ->
+                       (Int.(<)
+                       (integer_of_int32
+                       (select intP_intM_arr_1_4
+                       (shift arr_1 (integer_of_int32 i_6))))
+                       (integer_of_int32
+                       (select intP_intM_arr_1_4
+                       (shift arr_1 (Int.(-) (integer_of_int32 i_6) (1)))))))) ->
+                     (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 99 12 25#
+                     ((integer_of_int32 result) = (Int.(-_) (1)))))
+                   /\ ((forall i_7:int32.
+                        (((Int.(<=) (1) (integer_of_int32 i_7))
+                         /\ (Int.(<) (integer_of_int32 i_7)
+                            (integer_of_int32 n_2))) ->
+                         (Int.(>)
+                         (integer_of_int32
+                         (select intP_intM_arr_1_4
+                         (shift arr_1 (integer_of_int32 i_7))))
+                         (integer_of_int32
+                         (select intP_intM_arr_1_4
+                         (shift arr_1 (Int.(-) (integer_of_int32 i_7) (1)))))))) ->
+                       (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 96 12 24#
+                       ((integer_of_int32 result) = (1)))))) }
+
+val monotomic_requires
+ (arr_1:(pointer intP))
+  (n_2:int32)
+   (intP_arr_1_4_alloc_table:(alloc_table intP))
+    (intP_intM_arr_1_4:(memory intP int32)) : int32
+     requires { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/" 0 0 0#
+                ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 90 13 36#
+                 (Int.(<=) (offset_min intP_arr_1_4_alloc_table arr_1) (0)))
+                /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 90 13 36#
+                    (Int.(>=) (offset_max intP_arr_1_4_alloc_table arr_1)
+                    (Int.(-) (integer_of_int32 n_2) (1))))
+                   /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 91 13 18#
+                      (Int.(>) (integer_of_int32 n_2) (0)))))) }
+      ensures { ((((exists i_4:int32.
+                    ((Int.(<=) (1) (integer_of_int32 i_4))
+                    /\ ((Int.(<) (integer_of_int32 i_4)
+                        (integer_of_int32 n_2))
+                       /\ (Int.(<=)
+                          (integer_of_int32
+                          (select intP_intM_arr_1_4
+                          (shift arr_1 (integer_of_int32 i_4))))
+                          (integer_of_int32
+                          (select intP_intM_arr_1_4
+                          (shift arr_1 (Int.(-) (integer_of_int32 i_4) (1)))))))))
+                  /\ (exists i_5:int32.
+                      ((Int.(<=) (1) (integer_of_int32 i_5))
+                      /\ ((Int.(<) (integer_of_int32 i_5)
+                          (integer_of_int32 n_2))
+                         /\ (Int.(>=)
+                            (integer_of_int32
+                            (select intP_intM_arr_1_4
+                            (shift arr_1 (integer_of_int32 i_5))))
+                            (integer_of_int32
+                            (select intP_intM_arr_1_4
+                            (shift arr_1
+                            (Int.(-) (integer_of_int32 i_5) (1)))))))))) ->
+                  (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 103 12 24#
+                  ((integer_of_int32 result) = (0))))
+                /\ (((forall i_6:int32.
+                      (((Int.(<=) (1) (integer_of_int32 i_6))
+                       /\ (Int.(<) (integer_of_int32 i_6)
+                          (integer_of_int32 n_2))) ->
+                       (Int.(<)
+                       (integer_of_int32
+                       (select intP_intM_arr_1_4
+                       (shift arr_1 (integer_of_int32 i_6))))
+                       (integer_of_int32
+                       (select intP_intM_arr_1_4
+                       (shift arr_1 (Int.(-) (integer_of_int32 i_6) (1)))))))) ->
+                     (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 99 12 25#
+                     ((integer_of_int32 result) = (Int.(-_) (1)))))
+                   /\ ((forall i_7:int32.
+                        (((Int.(<=) (1) (integer_of_int32 i_7))
+                         /\ (Int.(<) (integer_of_int32 i_7)
+                            (integer_of_int32 n_2))) ->
+                         (Int.(>)
+                         (integer_of_int32
+                         (select intP_intM_arr_1_4
+                         (shift arr_1 (integer_of_int32 i_7))))
+                         (integer_of_int32
+                         (select intP_intM_arr_1_4
+                         (shift arr_1 (Int.(-) (integer_of_int32 i_7) (1)))))))) ->
+                       (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 96 12 24#
+                       ((integer_of_int32 result) = (1)))))) }
+
+val safe_int32_of_integer_
+ (x:int) : int32
+  requires { true }  ensures { ((integer_of_int32 result) = x) }
+
+val safe_int8_of_integer_
+ (x:int) : int8 requires { true }  ensures { ((integer_of_int8 result) = x) }
+
+let decreasing_ensures_default "W:diverges:N" "expl:Function decreasing, default behavior"
+ #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 76 4 14#=
+ fun (arr : (pointer intP)) (n : int32) (intP_arr_3_alloc_table : (alloc_table intP)) (intP_intM_arr_3 : (memory intP int32)) ->
+  requires { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/" 0 0 0#
+             ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 65 13 36#
+              (Int.(<=) (offset_min intP_arr_3_alloc_table arr) (0)))
+             /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 65 13 36#
+                 (Int.(>=) (offset_max intP_arr_3_alloc_table arr)
+                 (Int.(-) (integer_of_int32 n) (1))))
+                /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 66 13 18#
+                   (Int.(>) (integer_of_int32 n) (0))))))  }
+  ensures { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc" 165 10 18#
+            true) } 
+  ('Init: 
+  (let return = ref (any_int32 ()) in
+  try
+   begin
+     (let i_1_0 = ref (any_int32 ()) in
+     (let __retres_1 = ref (any_int32 ()) in
+     try
+      begin
+        try
+         begin
+           (let _jessie_94 = (i_1_0 := (safe_int32_of_integer_ (1))) in ());
+          ('Loop_8: 
+          begin
+            loop
+            invariant
+              { ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 79 23 72#
+                 (forall j_1:int32.
+                  (((Int.(<=) (1) (integer_of_int32 j_1))
+                   /\ (Int.(<) (integer_of_int32 j_1)
+                      (integer_of_int32 !i_1_0))) ->
+                   (Int.(<)
+                   (integer_of_int32
+                   (select intP_intM_arr_3
+                   (shift arr (integer_of_int32 j_1))))
+                   (integer_of_int32
+                   (select intP_intM_arr_3
+                   (shift arr (Int.(-) (integer_of_int32 j_1) (1)))))))))
+                /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 78 23 34#
+                   ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 78 23 29#
+                    (Int.(<=) (1) (integer_of_int32 !i_1_0)))
+                   /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 78 28 34#
+                      (Int.(<=) (integer_of_int32 !i_1_0)
+                      (integer_of_int32 n)))))) } 
+             begin
+               any () requires { true }  ensures { true } ;
+              try
+               begin
+                 (let _jessie_98 =
+                 begin
+                   (if (Int.(<) (integer_of_int32 !i_1_0) (integer_of_int32 n))
+                   then () else (raise (Goto_while_0_break_exc ())));
+                  (if (Int.(>=) (integer_of_int32 (safe_acc_ intP_intM_arr_3 
+                                                   (shift arr (integer_of_int32 !i_1_0)))) 
+                       (integer_of_int32 (safe_acc_ intP_intM_arr_3 (shift arr 
+                                                                    (integer_of_int32 
+                                                                    (safe_int32_of_integer_ 
+                                                                    (Int.(-) 
+                                                                    (integer_of_int32 !i_1_0) (1))))))))
+                  then
+                   begin
+                     (let _jessie_96 =
+                     (__retres_1 := (safe_int32_of_integer_ (0))) in ());
+                    (raise (Return_label_exc ())) end else ());
+                  (i_1_0 := (safe_int32_of_integer_ (Int.(+) (integer_of_int32 !i_1_0) (1))));
+                  !i_1_0 end in ()); (raise (Loop_continue_exc ())) end with
+               Loop_continue_exc _jessie_12 -> () end end end;
+           (raise (Goto_while_0_break_exc ())) end) end with
+         Goto_while_0_break_exc _jessie_9 -> ('While_0_break:  ()) end;
+       (let _jessie_100 = (__retres_1 := (safe_int32_of_integer_ (1))) in ());
+       (raise (Return_label_exc ())) end with Return_label_exc _jessie_10 ->
+      ('Return_label:  begin   (return := !__retres_1); (raise Return) end) end));
+    absurd  end with Return -> !return end)) 
+
+let decreasing_ensures_false_ "W:diverges:N" "expl:Function decreasing, Behavior `false_'"
+ #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 76 4 14#=
+ fun (arr : (pointer intP)) (n : int32) (intP_arr_3_alloc_table : (alloc_table intP)) (intP_intM_arr_3 : (memory intP int32)) ->
+  requires { ((exists i_2:int32.
+               ((Int.(<=) (1) (integer_of_int32 i_2))
+               /\ ((Int.(<) (integer_of_int32 i_2) (integer_of_int32 n))
+                  /\ (Int.(>=)
+                     (integer_of_int32
+                     (select intP_intM_arr_3
+                     (shift arr (integer_of_int32 i_2))))
+                     (integer_of_int32
+                     (select intP_intM_arr_3
+                     (shift arr (Int.(-) (integer_of_int32 i_2) (1)))))))))
+             /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/" 0 0 0#
+                ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 65 13 36#
+                 (Int.(<=) (offset_min intP_arr_3_alloc_table arr) (0)))
+                /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 65 13 36#
+                    (Int.(>=) (offset_max intP_arr_3_alloc_table arr)
+                    (Int.(-) (integer_of_int32 n) (1))))
+                   /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 66 13 18#
+                      (Int.(>) (integer_of_int32 n) (0)))))))  }
+  ensures { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 74 12 24#
+            ((integer_of_int32 result) = (0))) } 
+  ('Init: 
+  (let return = ref (any_int32 ()) in
+  try
+   begin
+     (let i_1_0 = ref (any_int32 ()) in
+     (let __retres_1 = ref (any_int32 ()) in
+     try
+      begin
+        try
+         begin
+           (let _jessie_112 = (i_1_0 := (safe_int32_of_integer_ (1))) in ());
+          ('Loop_10: 
+          begin
+            loop
+            invariant
+              { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc" 185 9 984#
+                true) } 
+             begin
+               any ()
+               requires { true } reads { i_1_0 } 
+                ensures { ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 79 23 72#
+                           (forall j_1:int32.
+                            (((Int.(<=) (1) (integer_of_int32 j_1))
+                             /\ (Int.(<) (integer_of_int32 j_1)
+                                (integer_of_int32 !i_1_0))) ->
+                             (Int.(<)
+                             (integer_of_int32
+                             (select intP_intM_arr_3
+                             (shift arr (integer_of_int32 j_1))))
+                             (integer_of_int32
+                             (select intP_intM_arr_3
+                             (shift arr (Int.(-) (integer_of_int32 j_1) (1)))))))))
+                          /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 78 23 34#
+                             ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 78 23 29#
+                              (Int.(<=) (1) (integer_of_int32 !i_1_0)))
+                             /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 78 28 34#
+                                (Int.(<=) (integer_of_int32 !i_1_0)
+                                (integer_of_int32 n)))))) } ;
+              try
+               begin
+                 (let _jessie_116 =
+                 begin
+                   (if (Int.(<) (integer_of_int32 !i_1_0) (integer_of_int32 n))
+                   then () else (raise (Goto_while_0_break_exc ())));
+                  (if (Int.(>=) (integer_of_int32 (safe_acc_ intP_intM_arr_3 
+                                                   (shift arr (integer_of_int32 !i_1_0)))) 
+                       (integer_of_int32 (safe_acc_ intP_intM_arr_3 (shift arr 
+                                                                    (integer_of_int32 
+                                                                    (safe_int32_of_integer_ 
+                                                                    (Int.(-) 
+                                                                    (integer_of_int32 !i_1_0) (1))))))))
+                  then
+                   begin
+                     (let _jessie_114 =
+                     (__retres_1 := (safe_int32_of_integer_ (0))) in ());
+                    (raise (Return_label_exc ())) end else ());
+                  (i_1_0 := (safe_int32_of_integer_ (Int.(+) (integer_of_int32 !i_1_0) (1))));
+                  !i_1_0 end in ()); (raise (Loop_continue_exc ())) end with
+               Loop_continue_exc _jessie_12 -> () end end end;
+           (raise (Goto_while_0_break_exc ())) end) end with
+         Goto_while_0_break_exc _jessie_9 -> ('While_0_break:  ()) end;
+       (let _jessie_118 = (__retres_1 := (safe_int32_of_integer_ (1))) in ());
+       (raise (Return_label_exc ())) end with Return_label_exc _jessie_10 ->
+      ('Return_label:  begin   (return := !__retres_1); (raise Return) end) end));
+    absurd  end with Return -> !return end)) 
+
+let decreasing_ensures_true_ "W:diverges:N" "expl:Function decreasing, Behavior `true_'"
+ #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 76 4 14#=
+ fun (arr : (pointer intP)) (n : int32) (intP_arr_3_alloc_table : (alloc_table intP)) (intP_intM_arr_3 : (memory intP int32)) ->
+  requires { ((forall i_3:int32.
+               (((Int.(<=) (1) (integer_of_int32 i_3))
+                /\ (Int.(<) (integer_of_int32 i_3) (integer_of_int32 n))) ->
+                (Int.(<)
+                (integer_of_int32
+                (select intP_intM_arr_3 (shift arr (integer_of_int32 i_3))))
+                (integer_of_int32
+                (select intP_intM_arr_3
+                (shift arr (Int.(-) (integer_of_int32 i_3) (1))))))))
+             /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/" 0 0 0#
+                ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 65 13 36#
+                 (Int.(<=) (offset_min intP_arr_3_alloc_table arr) (0)))
+                /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 65 13 36#
+                    (Int.(>=) (offset_max intP_arr_3_alloc_table arr)
+                    (Int.(-) (integer_of_int32 n) (1))))
+                   /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 66 13 18#
+                      (Int.(>) (integer_of_int32 n) (0)))))))  }
+  ensures { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 71 12 24#
+            ((integer_of_int32 result) = (1))) } 
+  ('Init: 
+  (let return = ref (any_int32 ()) in
+  try
+   begin
+     (let i_1_0 = ref (any_int32 ()) in
+     (let __retres_1 = ref (any_int32 ()) in
+     try
+      begin
+        try
+         begin
+           (let _jessie_103 = (i_1_0 := (safe_int32_of_integer_ (1))) in ());
+          ('Loop_9: 
+          begin
+            loop
+            invariant
+              { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc" 185 9 984#
+                true) } 
+             begin
+               any ()
+               requires { true } reads { i_1_0 } 
+                ensures { ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 79 23 72#
+                           (forall j_1:int32.
+                            (((Int.(<=) (1) (integer_of_int32 j_1))
+                             /\ (Int.(<) (integer_of_int32 j_1)
+                                (integer_of_int32 !i_1_0))) ->
+                             (Int.(<)
+                             (integer_of_int32
+                             (select intP_intM_arr_3
+                             (shift arr (integer_of_int32 j_1))))
+                             (integer_of_int32
+                             (select intP_intM_arr_3
+                             (shift arr (Int.(-) (integer_of_int32 j_1) (1)))))))))
+                          /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 78 23 34#
+                             ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 78 23 29#
+                              (Int.(<=) (1) (integer_of_int32 !i_1_0)))
+                             /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 78 28 34#
+                                (Int.(<=) (integer_of_int32 !i_1_0)
+                                (integer_of_int32 n)))))) } ;
+              try
+               begin
+                 (let _jessie_107 =
+                 begin
+                   (if (Int.(<) (integer_of_int32 !i_1_0) (integer_of_int32 n))
+                   then () else (raise (Goto_while_0_break_exc ())));
+                  (if (Int.(>=) (integer_of_int32 (safe_acc_ intP_intM_arr_3 
+                                                   (shift arr (integer_of_int32 !i_1_0)))) 
+                       (integer_of_int32 (safe_acc_ intP_intM_arr_3 (shift arr 
+                                                                    (integer_of_int32 
+                                                                    (safe_int32_of_integer_ 
+                                                                    (Int.(-) 
+                                                                    (integer_of_int32 !i_1_0) (1))))))))
+                  then
+                   begin
+                     (let _jessie_105 =
+                     (__retres_1 := (safe_int32_of_integer_ (0))) in ());
+                    (raise (Return_label_exc ())) end else ());
+                  (i_1_0 := (safe_int32_of_integer_ (Int.(+) (integer_of_int32 !i_1_0) (1))));
+                  !i_1_0 end in ()); (raise (Loop_continue_exc ())) end with
+               Loop_continue_exc _jessie_12 -> () end end end;
+           (raise (Goto_while_0_break_exc ())) end) end with
+         Goto_while_0_break_exc _jessie_9 -> ('While_0_break:  ()) end;
+       (let _jessie_109 = (__retres_1 := (safe_int32_of_integer_ (1))) in ());
+       (raise (Return_label_exc ())) end with Return_label_exc _jessie_10 ->
+      ('Return_label:  begin   (return := !__retres_1); (raise Return) end) end));
+    absurd  end with Return -> !return end)) 
+
+let decreasing_safety "expl:Function decreasing, Safety"
+ #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 76 4 14#=
+ fun (arr : (pointer intP)) (n : int32) (intP_arr_3_alloc_table : (alloc_table intP)) (intP_intM_arr_3 : (memory intP int32)) ->
+  requires { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/" 0 0 0#
+             ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 65 13 36#
+              (Int.(<=) (offset_min intP_arr_3_alloc_table arr) (0)))
+             /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 65 13 36#
+                 (Int.(>=) (offset_max intP_arr_3_alloc_table arr)
+                 (Int.(-) (integer_of_int32 n) (1))))
+                /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 66 13 18#
+                   (Int.(>) (integer_of_int32 n) (0))))))  } ensures { true } 
+  ('Init: 
+  (let return = ref (any_int32 ()) in
+  try
+   begin
+     (let i_1_0 = ref (any_int32 ()) in
+     (let __retres_1 = ref (any_int32 ()) in
+     try
+      begin
+        try
+         begin
+           (let _jessie_85 = (i_1_0 := (safe_int32_of_integer_ (1))) in ());
+          ('Loop_7: 
+          begin
+            loop
+            invariant
+              { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc" 185 9 984#
+                true) }
+              variant { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 80 21 26# 
+                (Int.(-) (integer_of_int32 n) (integer_of_int32 !i_1_0))) }
+             begin
+               any ()
+               requires { true } reads { i_1_0 } 
+                ensures { ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 79 23 72#
+                           (forall j_1:int32.
+                            (((Int.(<=) (1) (integer_of_int32 j_1))
+                             /\ (Int.(<) (integer_of_int32 j_1)
+                                (integer_of_int32 !i_1_0))) ->
+                             (Int.(<)
+                             (integer_of_int32
+                             (select intP_intM_arr_3
+                             (shift arr (integer_of_int32 j_1))))
+                             (integer_of_int32
+                             (select intP_intM_arr_3
+                             (shift arr (Int.(-) (integer_of_int32 j_1) (1)))))))))
+                          /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 78 23 34#
+                             ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 78 23 29#
+                              (Int.(<=) (1) (integer_of_int32 !i_1_0)))
+                             /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 78 28 34#
+                                (Int.(<=) (integer_of_int32 !i_1_0)
+                                (integer_of_int32 n)))))) } ;
+              try
+               begin
+                 (let _jessie_89 =
+                 begin
+                   (if (Int.(<) (integer_of_int32 !i_1_0) (integer_of_int32 n))
+                   then () else (raise (Goto_while_0_break_exc ())));
+                  (if (Int.(>=) (integer_of_int32 ("expl:pointer dereference"
+                                                  #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 83 12 18#
+                                                  (offset_acc_ intP_arr_3_alloc_table intP_intM_arr_3 arr 
+                                                   (integer_of_int32 !i_1_0)))) 
+                       (integer_of_int32 ("expl:pointer dereference"
+                                         #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 83 22 32#
+                                         (offset_acc_ intP_arr_3_alloc_table intP_intM_arr_3 arr 
+                                          (integer_of_int32 ("expl:arithmetic overflow"
+                                                            #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 83 26 31#
+                                                            (int32_of_integer_ 
+                                                             (Int.(-) 
+                                                               (integer_of_int32 !i_1_0) (1)))))))))
+                  then
+                   begin
+                     (let _jessie_87 =
+                     (__retres_1 := (safe_int32_of_integer_ (0))) in ());
+                    (raise (Return_label_exc ())) end else ());
+                  (i_1_0 := ("expl:arithmetic overflow"
+                            #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 82 27 30#
+                            (int32_of_integer_ (Int.(+) (integer_of_int32 !i_1_0) (1)))));
+                  !i_1_0 end in ()); (raise (Loop_continue_exc ())) end with
+               Loop_continue_exc _jessie_12 -> () end end end;
+           (raise (Goto_while_0_break_exc ())) end) end with
+         Goto_while_0_break_exc _jessie_9 -> ('While_0_break:  ()) end;
+       (let _jessie_91 = (__retres_1 := (safe_int32_of_integer_ (1))) in ());
+       (raise (Return_label_exc ())) end with Return_label_exc _jessie_10 ->
+      ('Return_label:  begin   (return := !__retres_1); (raise Return) end) end));
+    absurd  end with Return -> !return end)) 
+
+let double__ensures_default "W:diverges:N" "expl:Function double_, default behavior"
+ #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 23 5 12#=
+ fun (t : (pointer intP)) (n_0 : int32) (intP_intM_t_1 : ref (memory intP int32)) (intP_t_1_alloc_table : (alloc_table intP)) ->
+  requires { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/" 0 0 0#
+             ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 18 13 18#
+              (Int.(<) (0) (integer_of_int32 n_0)))
+             /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 18 17 31#
+                 (Int.(<=) (integer_of_int32 n_0) (100000000)))
+                /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 19 13 33#
+                    (Int.(<=) (offset_min intP_t_1_alloc_table t) (0)))
+                   /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 19 13 33#
+                      (Int.(>=) (offset_max intP_t_1_alloc_table t)
+                      (Int.(-) (integer_of_int32 n_0) (1))))))))  }
+  ensures { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 21 12 55#
+            (forall i:int32.
+             (((Int.(<=) (0) (integer_of_int32 i))
+              /\ (Int.(<) (integer_of_int32 i) (integer_of_int32 n_0))) ->
+              ((integer_of_int32
+               (select !intP_intM_t_1 (shift t (integer_of_int32 i)))) = 
+              (Int.(*) (2) (integer_of_int32 i)))))) } 
+  ('Init: 
+  try
+   begin
+     (let i_0 = ref (any_int32 ()) in
+     try
+      begin
+        (let _jessie_39 = (i_0 := (safe_int32_of_integer_ (0))) in ());
+       ('Loop_2: 
+       begin
+         loop
+         invariant
+           { ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 26 23 66#
+              (forall j:int32.
+               (((Int.(<=) (0) (integer_of_int32 j))
+                /\ (Int.(<) (integer_of_int32 j) (integer_of_int32 !i_0))) ->
+                ((integer_of_int32
+                 (select !intP_intM_t_1 (shift t (integer_of_int32 j)))) = 
+                (Int.(*) (2) (integer_of_int32 j))))))
+             /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 25 23 34#
+                ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 25 23 29#
+                 (Int.(<=) (0) (integer_of_int32 !i_0)))
+                /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 25 28 34#
+                   (Int.(<=) (integer_of_int32 !i_0) (integer_of_int32 n_0)))))) }
+           
+          begin
+            any () requires { true }  ensures { true } ;
+           try
+            begin
+              (let _jessie_47 =
+              begin
+                (if (Int.(<) (integer_of_int32 !i_0) (integer_of_int32 n_0))
+                then () else (raise (Goto_while_0_break_exc ())));
+               (let _jessie_45 =
+               (let _jessie_41 =
+               (safe_int32_of_integer_ (Int.(*) (2) (integer_of_int32 !i_0))) in
+               (let _jessie_42 = t in
+               (let _jessie_43 = (integer_of_int32 !i_0) in
+               (let _jessie_44 = (shift _jessie_42 _jessie_43) in
+               begin
+                 (safe_upd_ intP_intM_t_1 _jessie_44 _jessie_41); _jessie_41
+               end)))) in ());
+               (i_0 := (safe_int32_of_integer_ (Int.(+) (integer_of_int32 !i_0) (1))));
+               !i_0 end in ()); (raise (Loop_continue_exc ())) end with
+            Loop_continue_exc _jessie_4 -> () end end end;
+        (raise (Goto_while_0_break_exc ())) end) end with
+      Goto_while_0_break_exc _jessie_2 ->
+      ('While_0_break:  begin   (); (raise Return) end) end); (raise Return)
+   end with Return -> () end) 
+
+let double__safety "expl:Function double_, Safety"
+ #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 23 5 12#=
+ fun (t : (pointer intP)) (n_0 : int32) (intP_intM_t_1 : ref (memory intP int32)) (intP_t_1_alloc_table : (alloc_table intP)) ->
+  requires { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/" 0 0 0#
+             ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 18 13 18#
+              (Int.(<) (0) (integer_of_int32 n_0)))
+             /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 18 17 31#
+                 (Int.(<=) (integer_of_int32 n_0) (100000000)))
+                /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 19 13 33#
+                    (Int.(<=) (offset_min intP_t_1_alloc_table t) (0)))
+                   /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 19 13 33#
+                      (Int.(>=) (offset_max intP_t_1_alloc_table t)
+                      (Int.(-) (integer_of_int32 n_0) (1))))))))  }
+  ensures { true } 
+  ('Init: 
+  try
+   begin
+     (let i_0 = ref (any_int32 ()) in
+     try
+      begin
+        (let _jessie_29 = (i_0 := (safe_int32_of_integer_ (0))) in ());
+       ('Loop_1: 
+       begin
+         loop
+         invariant
+           { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc" 75 6 771#
+             true) }
+           variant { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 27 21 26# 
+             (Int.(-) (integer_of_int32 n_0) (integer_of_int32 !i_0))) }
+          begin
+            any ()
+            requires { true } reads { i_0, intP_intM_t_1 } 
+             ensures { ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 26 23 66#
+                        (forall j:int32.
+                         (((Int.(<=) (0) (integer_of_int32 j))
+                          /\ (Int.(<) (integer_of_int32 j)
+                             (integer_of_int32 !i_0))) ->
+                          ((integer_of_int32
+                           (select !intP_intM_t_1
+                           (shift t (integer_of_int32 j)))) = (Int.(*) (2)
+                                                              (integer_of_int32
+                                                              j))))))
+                       /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 25 23 34#
+                          ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 25 23 29#
+                           (Int.(<=) (0) (integer_of_int32 !i_0)))
+                          /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 25 28 34#
+                             (Int.(<=) (integer_of_int32 !i_0)
+                             (integer_of_int32 n_0)))))) } ;
+           try
+            begin
+              (let _jessie_37 =
+              begin
+                (if (Int.(<) (integer_of_int32 !i_0) (integer_of_int32 n_0))
+                then () else (raise (Goto_while_0_break_exc ())));
+               (let _jessie_35 =
+               (let _jessie_31 =
+               ("expl:arithmetic overflow"
+               #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 30 15 20#
+               (int32_of_integer_ (Int.(*) (2) (integer_of_int32 !i_0)))) in
+               (let _jessie_32 = t in
+               (let _jessie_33 = (integer_of_int32 !i_0) in
+               (let _jessie_34 = (shift _jessie_32 _jessie_33) in
+               ("expl:pointer dereference"
+               #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc" 88 25 220#
+               begin
+                 (offset_upd_ intP_t_1_alloc_table intP_intM_t_1 _jessie_32 _jessie_33 _jessie_31);
+                _jessie_31 end))))) in ());
+               (i_0 := ("expl:arithmetic overflow"
+                       #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 29 27 30#
+                       (int32_of_integer_ (Int.(+) (integer_of_int32 !i_0) (1)))));
+               !i_0 end in ()); (raise (Loop_continue_exc ())) end with
+            Loop_continue_exc _jessie_4 -> () end end end;
+        (raise (Goto_while_0_break_exc ())) end) end with
+      Goto_while_0_break_exc _jessie_2 ->
+      ('While_0_break:  begin   (); (raise Return) end) end); (raise Return)
+   end with Return -> () end) 
+
+let increasing_ensures_default "W:diverges:N" "expl:Function increasing, default behavior"
+ #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 48 4 14#=
+ fun (arr_0 : (pointer intP)) (n_1 : int32) (intP_arr_0_2_alloc_table : (alloc_table intP)) (intP_intM_arr_0_2 : (memory intP int32)) ->
+  requires { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/" 0 0 0#
+             ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 37 13 36#
+              (Int.(<=) (offset_min intP_arr_0_2_alloc_table arr_0) (0)))
+             /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 37 13 36#
+                 (Int.(>=) (offset_max intP_arr_0_2_alloc_table arr_0)
+                 (Int.(-) (integer_of_int32 n_1) (1))))
+                /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 38 13 18#
+                   (Int.(>) (integer_of_int32 n_1) (0))))))  }
+  ensures { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc" 106 10 18#
+            true) } 
+  ('Init: 
+  (let return = ref (any_int32 ()) in
+  try
+   begin
+     (let i_0_1 = ref (any_int32 ()) in
+     (let __retres_0 = ref (any_int32 ()) in
+     try
+      begin
+        try
+         begin
+           (let _jessie_58 = (i_0_1 := (safe_int32_of_integer_ (1))) in ());
+          ('Loop_4: 
+          begin
+            loop
+            invariant
+              { ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 51 23 72#
+                 (forall j_0:int32.
+                  (((Int.(<=) (1) (integer_of_int32 j_0))
+                   /\ (Int.(<) (integer_of_int32 j_0)
+                      (integer_of_int32 !i_0_1))) ->
+                   (Int.(>)
+                   (integer_of_int32
+                   (select intP_intM_arr_0_2
+                   (shift arr_0 (integer_of_int32 j_0))))
+                   (integer_of_int32
+                   (select intP_intM_arr_0_2
+                   (shift arr_0 (Int.(-) (integer_of_int32 j_0) (1)))))))))
+                /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 50 23 34#
+                   ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 50 23 29#
+                    (Int.(<=) (1) (integer_of_int32 !i_0_1)))
+                   /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 50 28 34#
+                      (Int.(<=) (integer_of_int32 !i_0_1)
+                      (integer_of_int32 n_1)))))) } 
+             begin
+               any () requires { true }  ensures { true } ;
+              try
+               begin
+                 (let _jessie_62 =
+                 begin
+                   (if (Int.(<) (integer_of_int32 !i_0_1) (integer_of_int32 n_1))
+                   then () else (raise (Goto_while_0_break_exc ())));
+                  (if (Int.(<=) (integer_of_int32 (safe_acc_ intP_intM_arr_0_2 
+                                                   (shift arr_0 (integer_of_int32 !i_0_1)))) 
+                       (integer_of_int32 (safe_acc_ intP_intM_arr_0_2 
+                                          (shift arr_0 (integer_of_int32 
+                                                        (safe_int32_of_integer_ 
+                                                         (Int.(-) (integer_of_int32 !i_0_1) (1))))))))
+                  then
+                   begin
+                     (let _jessie_60 =
+                     (__retres_0 := (safe_int32_of_integer_ (0))) in ());
+                    (raise (Return_label_exc ())) end else ());
+                  (i_0_1 := (safe_int32_of_integer_ (Int.(+) (integer_of_int32 !i_0_1) (1))));
+                  !i_0_1 end in ()); (raise (Loop_continue_exc ())) end with
+               Loop_continue_exc _jessie_8 -> () end end end;
+           (raise (Goto_while_0_break_exc ())) end) end with
+         Goto_while_0_break_exc _jessie_5 -> ('While_0_break:  ()) end;
+       (let _jessie_64 = (__retres_0 := (safe_int32_of_integer_ (1))) in ());
+       (raise (Return_label_exc ())) end with Return_label_exc _jessie_6 ->
+      ('Return_label:  begin   (return := !__retres_0); (raise Return) end) end));
+    absurd  end with Return -> !return end)) 
+
+let increasing_ensures_false_ "W:diverges:N" "expl:Function increasing, Behavior `false_'"
+ #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 48 4 14#=
+ fun (arr_0 : (pointer intP)) (n_1 : int32) (intP_arr_0_2_alloc_table : (alloc_table intP)) (intP_intM_arr_0_2 : (memory intP int32)) ->
+  requires { ((exists i_0_0:int32.
+               ((Int.(<=) (1) (integer_of_int32 i_0_0))
+               /\ ((Int.(<) (integer_of_int32 i_0_0) (integer_of_int32 n_1))
+                  /\ (Int.(<=)
+                     (integer_of_int32
+                     (select intP_intM_arr_0_2
+                     (shift arr_0 (integer_of_int32 i_0_0))))
+                     (integer_of_int32
+                     (select intP_intM_arr_0_2
+                     (shift arr_0 (Int.(-) (integer_of_int32 i_0_0) (1)))))))))
+             /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/" 0 0 0#
+                ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 37 13 36#
+                 (Int.(<=) (offset_min intP_arr_0_2_alloc_table arr_0) (0)))
+                /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 37 13 36#
+                    (Int.(>=) (offset_max intP_arr_0_2_alloc_table arr_0)
+                    (Int.(-) (integer_of_int32 n_1) (1))))
+                   /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 38 13 18#
+                      (Int.(>) (integer_of_int32 n_1) (0)))))))  }
+  ensures { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 46 12 24#
+            ((integer_of_int32 result) = (0))) } 
+  ('Init: 
+  (let return = ref (any_int32 ()) in
+  try
+   begin
+     (let i_0_1 = ref (any_int32 ()) in
+     (let __retres_0 = ref (any_int32 ()) in
+     try
+      begin
+        try
+         begin
+           (let _jessie_76 = (i_0_1 := (safe_int32_of_integer_ (1))) in ());
+          ('Loop_6: 
+          begin
+            loop
+            invariant
+              { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc" 126 9 1066#
+                true) } 
+             begin
+               any ()
+               requires { true } reads { i_0_1 } 
+                ensures { ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 51 23 72#
+                           (forall j_0:int32.
+                            (((Int.(<=) (1) (integer_of_int32 j_0))
+                             /\ (Int.(<) (integer_of_int32 j_0)
+                                (integer_of_int32 !i_0_1))) ->
+                             (Int.(>)
+                             (integer_of_int32
+                             (select intP_intM_arr_0_2
+                             (shift arr_0 (integer_of_int32 j_0))))
+                             (integer_of_int32
+                             (select intP_intM_arr_0_2
+                             (shift arr_0
+                             (Int.(-) (integer_of_int32 j_0) (1)))))))))
+                          /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 50 23 34#
+                             ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 50 23 29#
+                              (Int.(<=) (1) (integer_of_int32 !i_0_1)))
+                             /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 50 28 34#
+                                (Int.(<=) (integer_of_int32 !i_0_1)
+                                (integer_of_int32 n_1)))))) } ;
+              try
+               begin
+                 (let _jessie_80 =
+                 begin
+                   (if (Int.(<) (integer_of_int32 !i_0_1) (integer_of_int32 n_1))
+                   then () else (raise (Goto_while_0_break_exc ())));
+                  (if (Int.(<=) (integer_of_int32 (safe_acc_ intP_intM_arr_0_2 
+                                                   (shift arr_0 (integer_of_int32 !i_0_1)))) 
+                       (integer_of_int32 (safe_acc_ intP_intM_arr_0_2 
+                                          (shift arr_0 (integer_of_int32 
+                                                        (safe_int32_of_integer_ 
+                                                         (Int.(-) (integer_of_int32 !i_0_1) (1))))))))
+                  then
+                   begin
+                     (let _jessie_78 =
+                     (__retres_0 := (safe_int32_of_integer_ (0))) in ());
+                    (raise (Return_label_exc ())) end else ());
+                  (i_0_1 := (safe_int32_of_integer_ (Int.(+) (integer_of_int32 !i_0_1) (1))));
+                  !i_0_1 end in ()); (raise (Loop_continue_exc ())) end with
+               Loop_continue_exc _jessie_8 -> () end end end;
+           (raise (Goto_while_0_break_exc ())) end) end with
+         Goto_while_0_break_exc _jessie_5 -> ('While_0_break:  ()) end;
+       (let _jessie_82 = (__retres_0 := (safe_int32_of_integer_ (1))) in ());
+       (raise (Return_label_exc ())) end with Return_label_exc _jessie_6 ->
+      ('Return_label:  begin   (return := !__retres_0); (raise Return) end) end));
+    absurd  end with Return -> !return end)) 
+
+let increasing_ensures_true_ "W:diverges:N" "expl:Function increasing, Behavior `true_'"
+ #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 48 4 14#=
+ fun (arr_0 : (pointer intP)) (n_1 : int32) (intP_arr_0_2_alloc_table : (alloc_table intP)) (intP_intM_arr_0_2 : (memory intP int32)) ->
+  requires { ((forall i_1:int32.
+               (((Int.(<=) (1) (integer_of_int32 i_1))
+                /\ (Int.(<) (integer_of_int32 i_1) (integer_of_int32 n_1))) ->
+                (Int.(>)
+                (integer_of_int32
+                (select intP_intM_arr_0_2
+                (shift arr_0 (integer_of_int32 i_1))))
+                (integer_of_int32
+                (select intP_intM_arr_0_2
+                (shift arr_0 (Int.(-) (integer_of_int32 i_1) (1))))))))
+             /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/" 0 0 0#
+                ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 37 13 36#
+                 (Int.(<=) (offset_min intP_arr_0_2_alloc_table arr_0) (0)))
+                /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 37 13 36#
+                    (Int.(>=) (offset_max intP_arr_0_2_alloc_table arr_0)
+                    (Int.(-) (integer_of_int32 n_1) (1))))
+                   /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 38 13 18#
+                      (Int.(>) (integer_of_int32 n_1) (0)))))))  }
+  ensures { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 43 12 24#
+            ((integer_of_int32 result) = (1))) } 
+  ('Init: 
+  (let return = ref (any_int32 ()) in
+  try
+   begin
+     (let i_0_1 = ref (any_int32 ()) in
+     (let __retres_0 = ref (any_int32 ()) in
+     try
+      begin
+        try
+         begin
+           (let _jessie_67 = (i_0_1 := (safe_int32_of_integer_ (1))) in ());
+          ('Loop_5: 
+          begin
+            loop
+            invariant
+              { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc" 126 9 1066#
+                true) } 
+             begin
+               any ()
+               requires { true } reads { i_0_1 } 
+                ensures { ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 51 23 72#
+                           (forall j_0:int32.
+                            (((Int.(<=) (1) (integer_of_int32 j_0))
+                             /\ (Int.(<) (integer_of_int32 j_0)
+                                (integer_of_int32 !i_0_1))) ->
+                             (Int.(>)
+                             (integer_of_int32
+                             (select intP_intM_arr_0_2
+                             (shift arr_0 (integer_of_int32 j_0))))
+                             (integer_of_int32
+                             (select intP_intM_arr_0_2
+                             (shift arr_0
+                             (Int.(-) (integer_of_int32 j_0) (1)))))))))
+                          /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 50 23 34#
+                             ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 50 23 29#
+                              (Int.(<=) (1) (integer_of_int32 !i_0_1)))
+                             /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 50 28 34#
+                                (Int.(<=) (integer_of_int32 !i_0_1)
+                                (integer_of_int32 n_1)))))) } ;
+              try
+               begin
+                 (let _jessie_71 =
+                 begin
+                   (if (Int.(<) (integer_of_int32 !i_0_1) (integer_of_int32 n_1))
+                   then () else (raise (Goto_while_0_break_exc ())));
+                  (if (Int.(<=) (integer_of_int32 (safe_acc_ intP_intM_arr_0_2 
+                                                   (shift arr_0 (integer_of_int32 !i_0_1)))) 
+                       (integer_of_int32 (safe_acc_ intP_intM_arr_0_2 
+                                          (shift arr_0 (integer_of_int32 
+                                                        (safe_int32_of_integer_ 
+                                                         (Int.(-) (integer_of_int32 !i_0_1) (1))))))))
+                  then
+                   begin
+                     (let _jessie_69 =
+                     (__retres_0 := (safe_int32_of_integer_ (0))) in ());
+                    (raise (Return_label_exc ())) end else ());
+                  (i_0_1 := (safe_int32_of_integer_ (Int.(+) (integer_of_int32 !i_0_1) (1))));
+                  !i_0_1 end in ()); (raise (Loop_continue_exc ())) end with
+               Loop_continue_exc _jessie_8 -> () end end end;
+           (raise (Goto_while_0_break_exc ())) end) end with
+         Goto_while_0_break_exc _jessie_5 -> ('While_0_break:  ()) end;
+       (let _jessie_73 = (__retres_0 := (safe_int32_of_integer_ (1))) in ());
+       (raise (Return_label_exc ())) end with Return_label_exc _jessie_6 ->
+      ('Return_label:  begin   (return := !__retres_0); (raise Return) end) end));
+    absurd  end with Return -> !return end)) 
+
+let increasing_safety "expl:Function increasing, Safety"
+ #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 48 4 14#=
+ fun (arr_0 : (pointer intP)) (n_1 : int32) (intP_arr_0_2_alloc_table : (alloc_table intP)) (intP_intM_arr_0_2 : (memory intP int32)) ->
+  requires { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/" 0 0 0#
+             ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 37 13 36#
+              (Int.(<=) (offset_min intP_arr_0_2_alloc_table arr_0) (0)))
+             /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 37 13 36#
+                 (Int.(>=) (offset_max intP_arr_0_2_alloc_table arr_0)
+                 (Int.(-) (integer_of_int32 n_1) (1))))
+                /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 38 13 18#
+                   (Int.(>) (integer_of_int32 n_1) (0))))))  }
+  ensures { true } 
+  ('Init: 
+  (let return = ref (any_int32 ()) in
+  try
+   begin
+     (let i_0_1 = ref (any_int32 ()) in
+     (let __retres_0 = ref (any_int32 ()) in
+     try
+      begin
+        try
+         begin
+           (let _jessie_49 = (i_0_1 := (safe_int32_of_integer_ (1))) in ());
+          ('Loop_3: 
+          begin
+            loop
+            invariant
+              { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc" 126 9 1066#
+                true) }
+              variant { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 52 21 26# 
+                (Int.(-) (integer_of_int32 n_1) (integer_of_int32 !i_0_1))) }
+             begin
+               any ()
+               requires { true } reads { i_0_1 } 
+                ensures { ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 51 23 72#
+                           (forall j_0:int32.
+                            (((Int.(<=) (1) (integer_of_int32 j_0))
+                             /\ (Int.(<) (integer_of_int32 j_0)
+                                (integer_of_int32 !i_0_1))) ->
+                             (Int.(>)
+                             (integer_of_int32
+                             (select intP_intM_arr_0_2
+                             (shift arr_0 (integer_of_int32 j_0))))
+                             (integer_of_int32
+                             (select intP_intM_arr_0_2
+                             (shift arr_0
+                             (Int.(-) (integer_of_int32 j_0) (1)))))))))
+                          /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 50 23 34#
+                             ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 50 23 29#
+                              (Int.(<=) (1) (integer_of_int32 !i_0_1)))
+                             /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 50 28 34#
+                                (Int.(<=) (integer_of_int32 !i_0_1)
+                                (integer_of_int32 n_1)))))) } ;
+              try
+               begin
+                 (let _jessie_53 =
+                 begin
+                   (if (Int.(<) (integer_of_int32 !i_0_1) (integer_of_int32 n_1))
+                   then () else (raise (Goto_while_0_break_exc ())));
+                  (if (Int.(<=) (integer_of_int32 ("expl:pointer dereference"
+                                                  #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 55 12 18#
+                                                  (offset_acc_ intP_arr_0_2_alloc_table intP_intM_arr_0_2 arr_0 
+                                                   (integer_of_int32 !i_0_1)))) 
+                       (integer_of_int32 ("expl:pointer dereference"
+                                         #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 55 22 32#
+                                         (offset_acc_ intP_arr_0_2_alloc_table intP_intM_arr_0_2 arr_0 
+                                          (integer_of_int32 ("expl:arithmetic overflow"
+                                                            #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 55 26 31#
+                                                            (int32_of_integer_ 
+                                                             (Int.(-) 
+                                                               (integer_of_int32 !i_0_1) (1)))))))))
+                  then
+                   begin
+                     (let _jessie_51 =
+                     (__retres_0 := (safe_int32_of_integer_ (0))) in ());
+                    (raise (Return_label_exc ())) end else ());
+                  (i_0_1 := ("expl:arithmetic overflow"
+                            #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 54 27 30#
+                            (int32_of_integer_ (Int.(+) (integer_of_int32 !i_0_1) (1)))));
+                  !i_0_1 end in ()); (raise (Loop_continue_exc ())) end with
+               Loop_continue_exc _jessie_8 -> () end end end;
+           (raise (Goto_while_0_break_exc ())) end) end with
+         Goto_while_0_break_exc _jessie_5 -> ('While_0_break:  ()) end;
+       (let _jessie_55 = (__retres_0 := (safe_int32_of_integer_ (1))) in ());
+       (raise (Return_label_exc ())) end with Return_label_exc _jessie_6 ->
+      ('Return_label:  begin   (return := !__retres_0); (raise Return) end) end));
+    absurd  end with Return -> !return end)) 
+
+let max3_ensures_default "W:diverges:N" "expl:Function max3, default behavior"
+ #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 9 4 8#=
+ fun (a : int32) (b : int32) (c : int32) ->
+  requires { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/" 0 0 0#
+             true)  }
+  ensures { (#"/home/agayev169/software_certification/pw_graded/" 0 0 0#
+            ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 3 12 24#
+             (Int.(>=) (integer_of_int32 result) (integer_of_int32 a)))
+            /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 4 12 24#
+                (Int.(>=) (integer_of_int32 result) (integer_of_int32 b)))
+               /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 5 12 24#
+                   (Int.(>=) (integer_of_int32 result) (integer_of_int32 c)))
+                  /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 6 12 56#
+                     (((integer_of_int32 result) = (integer_of_int32 a))
+                     \/ (((integer_of_int32 result) = (integer_of_int32 b))
+                        \/ ((integer_of_int32 result) = (integer_of_int32 c))))))))) }
+  
+  ('Init: 
+  (let return = ref (any_int32 ()) in
+  try
+   begin
+     (let __retres = ref (any_int32 ()) in
+     try
+      begin
+        (if (Int.(>=) (integer_of_int32 a) (integer_of_int32 b))
+        then
+         (if (Int.(>=) (integer_of_int32 a) (integer_of_int32 c))
+         then
+          begin
+            (let _jessie_22 = (__retres := a) in ());
+           (raise (Return_label_exc ())) end else ()) else ());
+       (if (Int.(>=) (integer_of_int32 b) (integer_of_int32 b))
+       then
+        (if (Int.(>=) (integer_of_int32 b) (integer_of_int32 c))
+        then
+         begin
+           (let _jessie_24 = (__retres := b) in ());
+          (raise (Return_label_exc ())) end else ()) else ());
+       (let _jessie_26 = (__retres := c) in ());
+       (raise (Return_label_exc ())) end with Return_label_exc _jessie_1 ->
+      ('Return_label:  begin   (return := !__retres); (raise Return) end) end);
+    absurd  end with Return -> !return end)) 
+
+let max3_safety "expl:Function max3, Safety"
+ #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 9 4 8#=
+ fun (a : int32) (b : int32) (c : int32) ->
+  requires { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/" 0 0 0#
+             true)  } ensures { true } 
+  ('Init: 
+  (let return = ref (any_int32 ()) in
+  try
+   begin
+     (let __retres = ref (any_int32 ()) in
+     try
+      begin
+        (if (Int.(>=) (integer_of_int32 a) (integer_of_int32 b))
+        then
+         (if (Int.(>=) (integer_of_int32 a) (integer_of_int32 c))
+         then
+          begin
+            (let _jessie_15 = (__retres := a) in ());
+           (raise (Return_label_exc ())) end else ()) else ());
+       (if (Int.(>=) (integer_of_int32 b) (integer_of_int32 b))
+       then
+        (if (Int.(>=) (integer_of_int32 b) (integer_of_int32 c))
+        then
+         begin
+           (let _jessie_17 = (__retres := b) in ());
+          (raise (Return_label_exc ())) end else ()) else ());
+       (let _jessie_19 = (__retres := c) in ());
+       (raise (Return_label_exc ())) end with Return_label_exc _jessie_1 ->
+      ('Return_label:  begin   (return := !__retres); (raise Return) end) end);
+    absurd  end with Return -> !return end)) 
+
+let monotomic_ensures_decreasing "W:diverges:N" "expl:Function monotomic, Behavior `decreasing'"
+ #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 105 4 13#=
+ fun (arr_1 : (pointer intP)) (n_2 : int32) (intP_arr_1_4_alloc_table : (alloc_table intP)) (intP_intM_arr_1_4 : (memory intP int32)) ->
+  requires { ((forall i_6:int32.
+               (((Int.(<=) (1) (integer_of_int32 i_6))
+                /\ (Int.(<) (integer_of_int32 i_6) (integer_of_int32 n_2))) ->
+                (Int.(<)
+                (integer_of_int32
+                (select intP_intM_arr_1_4
+                (shift arr_1 (integer_of_int32 i_6))))
+                (integer_of_int32
+                (select intP_intM_arr_1_4
+                (shift arr_1 (Int.(-) (integer_of_int32 i_6) (1))))))))
+             /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/" 0 0 0#
+                ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 90 13 36#
+                 (Int.(<=) (offset_min intP_arr_1_4_alloc_table arr_1) (0)))
+                /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 90 13 36#
+                    (Int.(>=) (offset_max intP_arr_1_4_alloc_table arr_1)
+                    (Int.(-) (integer_of_int32 n_2) (1))))
+                   /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 91 13 18#
+                      (Int.(>) (integer_of_int32 n_2) (0)))))))  }
+  ensures { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 99 12 25#
+            ((integer_of_int32 result) = (Int.(-_) (1)))) } 
+  ('Init: 
+  (let return = ref (any_int32 ()) in
+  try
+   begin
+     (let tmp = ref (any_int32 ()) in
+     (let tmp_0 = ref (any_int32 ()) in
+     (let __retres_2 = ref (any_int32 ()) in
+     try
+      begin
+        (let _jessie_168 =
+        (tmp := (let _jessie_167 = arr_1 in
+                (let _jessie_166 = n_2 in
+                ("expl:precondition for call"
+                #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 106 8 26#
+                (increasing _jessie_167 _jessie_166 intP_arr_1_4_alloc_table intP_intM_arr_1_4))))) in
+        ());
+       (if ((integer_of_int32 !tmp) <> (0))
+       then
+        begin
+          (let _jessie_170 = (__retres_2 := (safe_int32_of_integer_ (1))) in
+          ()); (raise (Return_label_exc ())) end else ());
+       (let _jessie_174 =
+       (tmp_0 := (let _jessie_173 = arr_1 in
+                 (let _jessie_172 = n_2 in
+                 ("expl:precondition for call"
+                 #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 107 8 26#
+                 (decreasing _jessie_173 _jessie_172 intP_arr_1_4_alloc_table intP_intM_arr_1_4))))) in
+       ());
+       (if ((integer_of_int32 !tmp_0) <> (0))
+       then
+        begin
+          (let _jessie_176 =
+          (__retres_2 := (safe_int32_of_integer_ (Int.(-_) (1)))) in ());
+         (raise (Return_label_exc ())) end else ());
+       (let _jessie_178 = (__retres_2 := (safe_int32_of_integer_ (0))) in ());
+       (raise (Return_label_exc ())) end with Return_label_exc _jessie_13 ->
+      ('Return_label:  begin   (return := !__retres_2); (raise Return) end) end)));
+    absurd  end with Return -> !return end)) 
+
+let monotomic_ensures_default "W:diverges:N" "expl:Function monotomic, default behavior"
+ #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 105 4 13#=
+ fun (arr_1 : (pointer intP)) (n_2 : int32) (intP_arr_1_4_alloc_table : (alloc_table intP)) (intP_intM_arr_1_4 : (memory intP int32)) ->
+  requires { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/" 0 0 0#
+             ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 90 13 36#
+              (Int.(<=) (offset_min intP_arr_1_4_alloc_table arr_1) (0)))
+             /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 90 13 36#
+                 (Int.(>=) (offset_max intP_arr_1_4_alloc_table arr_1)
+                 (Int.(-) (integer_of_int32 n_2) (1))))
+                /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 91 13 18#
+                   (Int.(>) (integer_of_int32 n_2) (0))))))  }
+  ensures { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/kamal_aghayev.jc" 222 10 18#
+            true) } 
+  ('Init: 
+  (let return = ref (any_int32 ()) in
+  try
+   begin
+     (let tmp = ref (any_int32 ()) in
+     (let tmp_0 = ref (any_int32 ()) in
+     (let __retres_2 = ref (any_int32 ()) in
+     try
+      begin
+        (let _jessie_138 =
+        (tmp := (let _jessie_137 = arr_1 in
+                (let _jessie_136 = n_2 in
+                ("expl:precondition for call"
+                #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 106 8 26#
+                (increasing _jessie_137 _jessie_136 intP_arr_1_4_alloc_table intP_intM_arr_1_4))))) in
+        ());
+       (if ((integer_of_int32 !tmp) <> (0))
+       then
+        begin
+          (let _jessie_140 = (__retres_2 := (safe_int32_of_integer_ (1))) in
+          ()); (raise (Return_label_exc ())) end else ());
+       (let _jessie_144 =
+       (tmp_0 := (let _jessie_143 = arr_1 in
+                 (let _jessie_142 = n_2 in
+                 ("expl:precondition for call"
+                 #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 107 8 26#
+                 (decreasing _jessie_143 _jessie_142 intP_arr_1_4_alloc_table intP_intM_arr_1_4))))) in
+       ());
+       (if ((integer_of_int32 !tmp_0) <> (0))
+       then
+        begin
+          (let _jessie_146 =
+          (__retres_2 := (safe_int32_of_integer_ (Int.(-_) (1)))) in ());
+         (raise (Return_label_exc ())) end else ());
+       (let _jessie_148 = (__retres_2 := (safe_int32_of_integer_ (0))) in ());
+       (raise (Return_label_exc ())) end with Return_label_exc _jessie_13 ->
+      ('Return_label:  begin   (return := !__retres_2); (raise Return) end) end)));
+    absurd  end with Return -> !return end)) 
+
+let monotomic_ensures_increaing "W:diverges:N" "expl:Function monotomic, Behavior `increaing'"
+ #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 105 4 13#=
+ fun (arr_1 : (pointer intP)) (n_2 : int32) (intP_arr_1_4_alloc_table : (alloc_table intP)) (intP_intM_arr_1_4 : (memory intP int32)) ->
+  requires { ((forall i_7:int32.
+               (((Int.(<=) (1) (integer_of_int32 i_7))
+                /\ (Int.(<) (integer_of_int32 i_7) (integer_of_int32 n_2))) ->
+                (Int.(>)
+                (integer_of_int32
+                (select intP_intM_arr_1_4
+                (shift arr_1 (integer_of_int32 i_7))))
+                (integer_of_int32
+                (select intP_intM_arr_1_4
+                (shift arr_1 (Int.(-) (integer_of_int32 i_7) (1))))))))
+             /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/" 0 0 0#
+                ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 90 13 36#
+                 (Int.(<=) (offset_min intP_arr_1_4_alloc_table arr_1) (0)))
+                /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 90 13 36#
+                    (Int.(>=) (offset_max intP_arr_1_4_alloc_table arr_1)
+                    (Int.(-) (integer_of_int32 n_2) (1))))
+                   /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 91 13 18#
+                      (Int.(>) (integer_of_int32 n_2) (0)))))))  }
+  ensures { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 96 12 24#
+            ((integer_of_int32 result) = (1))) } 
+  ('Init: 
+  (let return = ref (any_int32 ()) in
+  try
+   begin
+     (let tmp = ref (any_int32 ()) in
+     (let tmp_0 = ref (any_int32 ()) in
+     (let __retres_2 = ref (any_int32 ()) in
+     try
+      begin
+        (let _jessie_153 =
+        (tmp := (let _jessie_152 = arr_1 in
+                (let _jessie_151 = n_2 in
+                ("expl:precondition for call"
+                #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 106 8 26#
+                (increasing _jessie_152 _jessie_151 intP_arr_1_4_alloc_table intP_intM_arr_1_4))))) in
+        ());
+       (if ((integer_of_int32 !tmp) <> (0))
+       then
+        begin
+          (let _jessie_155 = (__retres_2 := (safe_int32_of_integer_ (1))) in
+          ()); (raise (Return_label_exc ())) end else ());
+       (let _jessie_159 =
+       (tmp_0 := (let _jessie_158 = arr_1 in
+                 (let _jessie_157 = n_2 in
+                 ("expl:precondition for call"
+                 #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 107 8 26#
+                 (decreasing _jessie_158 _jessie_157 intP_arr_1_4_alloc_table intP_intM_arr_1_4))))) in
+       ());
+       (if ((integer_of_int32 !tmp_0) <> (0))
+       then
+        begin
+          (let _jessie_161 =
+          (__retres_2 := (safe_int32_of_integer_ (Int.(-_) (1)))) in ());
+         (raise (Return_label_exc ())) end else ());
+       (let _jessie_163 = (__retres_2 := (safe_int32_of_integer_ (0))) in ());
+       (raise (Return_label_exc ())) end with Return_label_exc _jessie_13 ->
+      ('Return_label:  begin   (return := !__retres_2); (raise Return) end) end)));
+    absurd  end with Return -> !return end)) 
+
+let monotomic_ensures_none "W:diverges:N" "expl:Function monotomic, Behavior `none'"
+ #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 105 4 13#=
+ fun (arr_1 : (pointer intP)) (n_2 : int32) (intP_arr_1_4_alloc_table : (alloc_table intP)) (intP_intM_arr_1_4 : (memory intP int32)) ->
+  requires { (((exists i_4:int32.
+                ((Int.(<=) (1) (integer_of_int32 i_4))
+                /\ ((Int.(<) (integer_of_int32 i_4) (integer_of_int32 n_2))
+                   /\ (Int.(<=)
+                      (integer_of_int32
+                      (select intP_intM_arr_1_4
+                      (shift arr_1 (integer_of_int32 i_4))))
+                      (integer_of_int32
+                      (select intP_intM_arr_1_4
+                      (shift arr_1 (Int.(-) (integer_of_int32 i_4) (1)))))))))
+              /\ (exists i_5:int32.
+                  ((Int.(<=) (1) (integer_of_int32 i_5))
+                  /\ ((Int.(<) (integer_of_int32 i_5) (integer_of_int32 n_2))
+                     /\ (Int.(>=)
+                        (integer_of_int32
+                        (select intP_intM_arr_1_4
+                        (shift arr_1 (integer_of_int32 i_5))))
+                        (integer_of_int32
+                        (select intP_intM_arr_1_4
+                        (shift arr_1 (Int.(-) (integer_of_int32 i_5) (1))))))))))
+             /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/" 0 0 0#
+                ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 90 13 36#
+                 (Int.(<=) (offset_min intP_arr_1_4_alloc_table arr_1) (0)))
+                /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 90 13 36#
+                    (Int.(>=) (offset_max intP_arr_1_4_alloc_table arr_1)
+                    (Int.(-) (integer_of_int32 n_2) (1))))
+                   /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 91 13 18#
+                      (Int.(>) (integer_of_int32 n_2) (0)))))))  }
+  ensures { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 103 12 24#
+            ((integer_of_int32 result) = (0))) } 
+  ('Init: 
+  (let return = ref (any_int32 ()) in
+  try
+   begin
+     (let tmp = ref (any_int32 ()) in
+     (let tmp_0 = ref (any_int32 ()) in
+     (let __retres_2 = ref (any_int32 ()) in
+     try
+      begin
+        (let _jessie_183 =
+        (tmp := (let _jessie_182 = arr_1 in
+                (let _jessie_181 = n_2 in
+                ("expl:precondition for call"
+                #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 106 8 26#
+                (increasing _jessie_182 _jessie_181 intP_arr_1_4_alloc_table intP_intM_arr_1_4))))) in
+        ());
+       (if ((integer_of_int32 !tmp) <> (0))
+       then
+        begin
+          (let _jessie_185 = (__retres_2 := (safe_int32_of_integer_ (1))) in
+          ()); (raise (Return_label_exc ())) end else ());
+       (let _jessie_189 =
+       (tmp_0 := (let _jessie_188 = arr_1 in
+                 (let _jessie_187 = n_2 in
+                 ("expl:precondition for call"
+                 #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 107 8 26#
+                 (decreasing _jessie_188 _jessie_187 intP_arr_1_4_alloc_table intP_intM_arr_1_4))))) in
+       ());
+       (if ((integer_of_int32 !tmp_0) <> (0))
+       then
+        begin
+          (let _jessie_191 =
+          (__retres_2 := (safe_int32_of_integer_ (Int.(-_) (1)))) in ());
+         (raise (Return_label_exc ())) end else ());
+       (let _jessie_193 = (__retres_2 := (safe_int32_of_integer_ (0))) in ());
+       (raise (Return_label_exc ())) end with Return_label_exc _jessie_13 ->
+      ('Return_label:  begin   (return := !__retres_2); (raise Return) end) end)));
+    absurd  end with Return -> !return end)) 
+
+let monotomic_safety "expl:Function monotomic, Safety"
+ #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 105 4 13#=
+ fun (arr_1 : (pointer intP)) (n_2 : int32) (intP_arr_1_4_alloc_table : (alloc_table intP)) (intP_intM_arr_1_4 : (memory intP int32)) ->
+  requires { (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.jessie/" 0 0 0#
+             ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 90 13 36#
+              (Int.(<=) (offset_min intP_arr_1_4_alloc_table arr_1) (0)))
+             /\ ((#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 90 13 36#
+                 (Int.(>=) (offset_max intP_arr_1_4_alloc_table arr_1)
+                 (Int.(-) (integer_of_int32 n_2) (1))))
+                /\ (#"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 91 13 18#
+                   (Int.(>) (integer_of_int32 n_2) (0))))))  }
+  ensures { true } 
+  ('Init: 
+  (let return = ref (any_int32 ()) in
+  try
+   begin
+     (let tmp = ref (any_int32 ()) in
+     (let tmp_0 = ref (any_int32 ()) in
+     (let __retres_2 = ref (any_int32 ()) in
+     try
+      begin
+        (let _jessie_123 =
+        (tmp := (let _jessie_122 = arr_1 in
+                (let _jessie_121 = n_2 in
+                ("expl:precondition for call"
+                #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 106 8 26#
+                (increasing_requires _jessie_122 _jessie_121 intP_arr_1_4_alloc_table intP_intM_arr_1_4))))) in
+        ());
+       (if ((integer_of_int32 !tmp) <> (0))
+       then
+        begin
+          (let _jessie_125 = (__retres_2 := (safe_int32_of_integer_ (1))) in
+          ()); (raise (Return_label_exc ())) end else ());
+       (let _jessie_129 =
+       (tmp_0 := (let _jessie_128 = arr_1 in
+                 (let _jessie_127 = n_2 in
+                 ("expl:precondition for call"
+                 #"/home/agayev169/software_certification/pw_graded/kamal_aghayev.c" 107 8 26#
+                 (decreasing_requires _jessie_128 _jessie_127 intP_arr_1_4_alloc_table intP_intM_arr_1_4))))) in
+       ());
+       (if ((integer_of_int32 !tmp_0) <> (0))
+       then
+        begin
+          (let _jessie_131 =
+          (__retres_2 := (safe_int32_of_integer_ (Int.(-_) (1)))) in ());
+         (raise (Return_label_exc ())) end else ());
+       (let _jessie_133 = (__retres_2 := (safe_int32_of_integer_ (0))) in ());
+       (raise (Return_label_exc ())) end with Return_label_exc _jessie_13 ->
+      ('Return_label:  begin   (return := !__retres_2); (raise Return) end) end)));
+    absurd  end with Return -> !return end)) 
+
+end
+
+
